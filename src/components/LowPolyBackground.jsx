@@ -3,90 +3,103 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
 /**
- * Animated Faceted Geometry for Pure Black Theme
+ * LowPolyBackground — Soft Lavender/Periwinkle Theme with floating 3D geometric shapes
+ * Matching the exact visual style from the reference image (top-left icosahedron, top-right sphere, bottom-right cone).
  */
-function PureBlackFacetedMesh() {
+
+/* Faceted Icosahedron (Top-Left) */
+function TopLeftPolyhedron() {
   const meshRef = useRef();
-  const wireframeRef = useRef();
-  const particlesRef = useRef();
-
-  // Create Icosahedron geometry with faceted low-poly offsets
-  const geometry = useMemo(() => {
-    const geom = new THREE.IcosahedronGeometry(4.0, 3);
-    const pos = geom.attributes.position;
-    for (let i = 0; i < pos.count; i++) {
-      const vx = pos.getX(i);
-      const vy = pos.getY(i);
-      const vz = pos.getZ(i);
-      const noise = (Math.sin(vx * 2.0) + Math.cos(vy * 2.0) + Math.sin(vz * 2.0)) * 0.18;
-      pos.setXYZ(i, vx + noise, vy + noise, vz + noise);
-    }
-    geom.computeVertexNormals();
-    return geom;
-  }, []);
-
-  // Floating particles
-  const particlesCount = 80;
-  const particlePositions = useMemo(() => {
-    const positions = new Float32Array(particlesCount * 3);
-    for (let i = 0; i < particlesCount * 3; i += 3) {
-      positions[i] = (Math.random() - 0.5) * 16;
-      positions[i + 1] = (Math.random() - 0.5) * 16;
-      positions[i + 2] = (Math.random() - 0.5) * 10;
-    }
-    return positions;
-  }, [particlesCount]);
+  const geom = useMemo(() => new THREE.IcosahedronGeometry(1.6, 1), []);
 
   useFrame((state, delta) => {
     if (meshRef.current) {
-      meshRef.current.rotation.y += delta * 0.15;
-      meshRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.4) * 0.12;
-    }
-    if (wireframeRef.current) {
-      wireframeRef.current.rotation.y += delta * 0.15;
-      wireframeRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.4) * 0.12;
-    }
-    if (particlesRef.current) {
-      particlesRef.current.rotation.y += delta * 0.03;
+      meshRef.current.rotation.y += delta * 0.2;
+      meshRef.current.rotation.x += delta * 0.1;
+      meshRef.current.position.y = 3.6 + Math.sin(state.clock.elapsedTime * 0.8) * 0.15;
     }
   });
 
   return (
-    <group position={[0, 0, -1]}>
-      {/* Faceted Base Mesh */}
-      <mesh ref={meshRef} geometry={geometry}>
-        <meshStandardMaterial
-          flatShading={true}
-          roughness={0.15}
-          metalness={0.9}
-          color="#08090C"
-          emissive="#030406"
-        />
-      </mesh>
+    <mesh ref={meshRef} geometry={geom} position={[-5.8, 3.6, -1]}>
+      <meshStandardMaterial
+        flatShading={true}
+        color="#C4B9FB"
+        roughness={0.2}
+        metalness={0.4}
+      />
+    </mesh>
+  );
+}
 
-      {/* Wireframe Facet Overlay */}
-      <mesh ref={wireframeRef} geometry={geometry} scale={1.003}>
-        <meshBasicMaterial
-          wireframe={true}
-          color="#00f2fe"
-          transparent={true}
-          opacity={0.18}
-        />
-      </mesh>
+/* Faceted Sphere (Top-Right inside background) */
+function TopRightSphere() {
+  const meshRef = useRef();
+  const geom = useMemo(() => new THREE.IcosahedronGeometry(0.7, 2), []);
 
-      {/* Particle Field */}
-      <points ref={particlesRef}>
-        <bufferGeometry>
-          <bufferAttribute
-            attach="attributes-position"
-            count={particlesCount}
-            array={particlePositions}
-            itemSize={3}
-          />
-        </bufferGeometry>
-        <pointsMaterial size={0.05} color="#00f2fe" transparent opacity={0.6} />
-      </points>
-    </group>
+  useFrame((state, delta) => {
+    if (meshRef.current) {
+      meshRef.current.rotation.y += delta * 0.3;
+      meshRef.current.position.y = 2.2 + Math.sin(state.clock.elapsedTime * 1.1) * 0.12;
+    }
+  });
+
+  return (
+    <mesh ref={meshRef} geometry={geom} position={[4.2, 2.2, 0]}>
+      <meshStandardMaterial
+        flatShading={true}
+        color="#E4DCFF"
+        roughness={0.15}
+        metalness={0.5}
+      />
+    </mesh>
+  );
+}
+
+/* Faceted Cone (Bottom-Right) */
+function BottomRightCone() {
+  const meshRef = useRef();
+  const geom = useMemo(() => new THREE.ConeGeometry(1.0, 2.0, 8), []);
+
+  useFrame((state, delta) => {
+    if (meshRef.current) {
+      meshRef.current.rotation.z = -0.6 + Math.sin(state.clock.elapsedTime * 0.7) * 0.08;
+      meshRef.current.rotation.y += delta * 0.25;
+      meshRef.current.position.y = -3.2 + Math.cos(state.clock.elapsedTime * 0.9) * 0.15;
+    }
+  });
+
+  return (
+    <mesh ref={meshRef} geometry={geom} position={[5.2, -3.2, 0]} rotation={[0.4, 0, -0.6]}>
+      <meshStandardMaterial
+        flatShading={true}
+        color="#B9C7FC"
+        roughness={0.25}
+        metalness={0.4}
+      />
+    </mesh>
+  );
+}
+
+/* Small shiny blue marble (Center-Left) */
+function FloatingMarble() {
+  const meshRef = useRef();
+  const geom = useMemo(() => new THREE.SphereGeometry(0.35, 32, 32), []);
+
+  useFrame((state) => {
+    if (meshRef.current) {
+      meshRef.current.position.y = -1.8 + Math.sin(state.clock.elapsedTime * 1.5) * 0.1;
+    }
+  });
+
+  return (
+    <mesh ref={meshRef} geometry={geom} position={[-4.5, -1.8, 1]}>
+      <meshStandardMaterial
+        color="#A1C4FE"
+        roughness={0.1}
+        metalness={0.8}
+      />
+    </mesh>
   );
 }
 
@@ -101,30 +114,31 @@ export default function LowPolyBackground() {
         height: '100vh',
         pointerEvents: 'none',
         zIndex: 0,
-        background: '#000000',
       }}
     >
-      {/* Radial Gradient overlay to ensure deep pitch black around edges */}
+      {/* Soft gradient overlay matching periwinkle lavender theme */}
       <div
         style={{
           position: 'absolute',
           inset: 0,
-          background: 'radial-gradient(circle at 50% 40%, rgba(10, 14, 25, 0.4) 0%, rgba(0, 0, 0, 0.98) 75%)',
-          zIndex: 1,
+          background: 'linear-gradient(135deg, #A89CF5 0%, #9485E9 40%, #8271E0 100%)',
+          zIndex: -1,
         }}
       />
 
       <Canvas
-        camera={{ position: [0, 0, 7.5], fov: 45 }}
+        camera={{ position: [0, 0, 8], fov: 45 }}
         style={{ position: 'absolute', inset: 0 }}
       >
-        <ambientLight intensity={0.4} />
-        {/* Prismatic Cyan / Magenta / Violet Light bursts */}
-        <pointLight position={[-6, 4, 5]} color="#00f2fe" intensity={3.0} />
-        <pointLight position={[6, -4, 5]} color="#ff007f" intensity={3.0} />
-        <pointLight position={[0, 6, 2]} color="#7928ca" intensity={2.2} />
+        <ambientLight intensity={0.75} color="#FFFFFF" />
+        <directionalLight position={[5, 8, 5]} intensity={1.5} color="#FFFFFF" />
+        <pointLight position={[-6, 4, 4]} color="#B8ACFF" intensity={2} />
+        <pointLight position={[6, -4, 4]} color="#6495ED" intensity={2} />
 
-        <PureBlackFacetedMesh />
+        <TopLeftPolyhedron />
+        <TopRightSphere />
+        <BottomRightCone />
+        <FloatingMarble />
       </Canvas>
     </div>
   );

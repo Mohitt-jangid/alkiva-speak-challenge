@@ -1,0 +1,382 @@
+/* ============================================================
+   HERO SECTION — Soft Lavender Frosted Glass Frame
+   Matching the reference image layout and CSS exactly.
+   ============================================================ */
+
+.hero-section {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  z-index: 2;
+}
+
+/* Outer Frosted Glass Container Frame */
+.hero-frame {
+  position: relative;
+  width: 100%;
+  max-width: 1240px;
+  min-height: 640px;
+  border-radius: 36px;
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(32px);
+  -webkit-backdrop-filter: blur(32px);
+  border: 1.5px solid rgba(255, 255, 255, 0.45);
+  box-shadow:
+    0 30px 90px rgba(55, 35, 140, 0.16),
+    0 4px 20px rgba(0, 0, 0, 0.04),
+    inset 0 1px 2px rgba(255, 255, 255, 0.5);
+  padding: 2.2rem 3rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* 2-Column Grid Layout */
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 3rem;
+  align-items: center;
+  width: 100%;
+  flex: 1;
+  margin-top: 1.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+/* Background Watermark Outline Text */
+.hero-watermark {
+  position: absolute;
+  right: -2rem;
+  bottom: -2rem;
+  font-size: clamp(8rem, 14vw, 13rem);
+  font-weight: 900;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.08);
+  font-family: var(--t-font-heading, 'Plus Jakarta Sans', sans-serif);
+  pointer-events: none;
+  z-index: 1;
+  letter-spacing: 0.05em;
+  user-select: none;
+}
+
+/* Left Column */
+.hero-left {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-eyebrow-container {
+  margin-bottom: 1.2rem;
+}
+
+.hero-eyebrow-text {
+  font-family: var(--t-font-body, 'Inter', sans-serif);
+  font-size: 0.88rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.95);
+  letter-spacing: 0.02em;
+}
+
+.hero-eyebrow-text strong {
+  font-weight: 700;
+}
+
+.hero-eyebrow-line {
+  width: 32px;
+  height: 1.5px;
+  background: rgba(255, 255, 255, 0.7);
+  margin-top: 0.4rem;
+  border-radius: 1px;
+}
+
+.hero-title {
+  font-family: var(--t-font-heading, 'Plus Jakarta Sans', sans-serif);
+  font-size: clamp(2.4rem, 4vw, 3.6rem);
+  font-weight: 700;
+  line-height: 1.12;
+  color: #FFFFFF;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.8rem;
+}
+
+.hero-title__highlight {
+  font-weight: 800;
+  color: #FFFFFF;
+}
+
+.hero-motivational-wrap {
+  margin-bottom: 1.5rem;
+}
+
+/* Dots indicator row */
+.hero-dots-row {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: 1.2rem;
+}
+
+.hero-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  transition: all 0.3s ease;
+}
+
+.hero-dot--active {
+  background: #FFFFFF;
+  border-color: #FFFFFF;
+  width: 7px;
+  height: 7px;
+}
+
+.hero-small-marble {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #E0F2FE, #2563EB);
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.4);
+  margin-left: 0.7rem;
+}
+
+/* Social Links */
+.hero-social-links {
+  display: flex;
+  gap: 1.4rem;
+  font-family: var(--t-font-body, 'Inter', sans-serif);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.65);
+  margin-top: 3.2rem;
+  letter-spacing: 0.12em;
+}
+
+.hero-social-links span {
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.hero-social-links span:hover {
+  color: #FFFFFF;
+}
+
+/* Center Column (3D Cobalt Sphere) */
+.hero-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+/* Right Column */
+.hero-right {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 2;
+}
+
+/* Overlapping Avatars */
+.hero-avatars {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.4rem;
+}
+
+.hero-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  margin-left: -10px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.hero-avatar--1 {
+  margin-left: 0;
+}
+
+/* Description paragraph */
+.hero-description {
+  font-family: var(--t-font-body, 'Inter', sans-serif);
+  font-size: 0.88rem;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.88);
+  margin-bottom: 1.8rem;
+  max-width: 290px;
+}
+
+.hero-description strong {
+  color: #FFFFFF;
+  font-weight: 700;
+}
+
+/* CTA Pill Buttons */
+.hero-cta-wrap {
+  margin-bottom: 2rem;
+}
+
+.hero-pill-btn {
+  font-family: var(--t-font-body, 'Inter', sans-serif);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  border-radius: 9999px;
+  padding: 0.72rem 2.2rem;
+  cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.hero-pill-btn--outline {
+  color: #FFFFFF;
+  background: transparent;
+  border: 1.5px solid rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+}
+
+.hero-pill-btn--outline:hover {
+  background: #FFFFFF;
+  color: #2D1B69;
+  border-color: #FFFFFF;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+}
+
+.hero-pill-btn--solid {
+  color: #2D1B69;
+  background: #FFFFFF;
+  border: 1.5px solid #FFFFFF;
+  box-shadow: 0 8px 24px rgba(45, 27, 105, 0.15);
+}
+
+.hero-pill-btn--solid:hover {
+  background: #F4F0FF;
+  transform: translateY(-2px);
+}
+
+.hero-right-caption {
+  font-family: var(--t-font-body, 'Inter', sans-serif);
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 0.04em;
+}
+
+/* ── Revealed View Styling ─────────────────────── */
+.hero-revealed {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 3rem 1rem;
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 3;
+}
+
+.hero-revealed__date {
+  font-family: var(--t-font-body, 'Inter', sans-serif);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 0.8rem;
+}
+
+.hero-revealed__topic {
+  font-family: var(--t-font-heading, 'Plus Jakarta Sans', sans-serif);
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 800;
+  color: #FFFFFF;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+.hero-revealed__line {
+  height: 2px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 2px;
+  margin-bottom: 1rem;
+}
+
+.hero-revealed__meta {
+  font-family: var(--t-font-body, 'Inter', sans-serif);
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 0.6rem;
+}
+
+.hero-revealed__quote {
+  font-family: var(--t-font-body, 'Inter', sans-serif);
+  font-size: 0.95rem;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.95);
+  margin-bottom: 2rem;
+}
+
+.hero-revealed__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.hero-back-link {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.8);
+  font-family: var(--t-font-body, 'Inter', sans-serif);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.hero-back-link:hover {
+  color: #FFFFFF;
+}
+
+/* Responsive adjustments */
+@media (max-width: 960px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    text-align: center;
+  }
+  .hero-left, .hero-right {
+    align-items: center;
+  }
+  .hero-description {
+    max-width: 100%;
+  }
+  .hero-social-links {
+    margin-top: 1.8rem;
+  }
+  .hero-watermark {
+    display: none;
+  }
+}

@@ -1,31 +1,38 @@
 import React, { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import MotivationalHero from '../components/MotivationalHero';
+import Challenge100Card from '../components/Challenge100/Challenge100Card';
+import Navbar from './Navbar';
+import { useAuth } from '../context/AuthContext';
 import { getDailyTopic, formatDisplayDate } from '../utils/dailyTopic';
+import './HeroSection.css';
 
 /**
- * HeroSection — Centered layout.
- * Clicking "Discover" immediately shows today's topic. No spinning animation.
+ * HeroSection — Single Page Glass Frame Landing
+ * Clean frosted glass container.
+ * Shows Today's Challenge from the 21 curated topics (1 per day).
  */
 
 const textVariants = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 25 },
   visible: (i) => ({
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.8,
-      delay: 0.3 + i * 0.12,
+      duration: 0.7,
+      delay: 0.2 + i * 0.1,
       ease: [0.16, 1, 0.3, 1],
     },
   }),
 };
 
-export default function HeroSection() {
+export default function HeroSection({ onOpenChallenge }) {
+  const { currentUser } = useAuth();
   const [revealed, setRevealed] = useState(false);
-
-  const { topic } = getDailyTopic();
+  const { topic, category, prompt, id } = getDailyTopic();
   const displayDate = formatDisplayDate();
+
+  const isMohit = currentUser?.id?.toLowerCase() === 'mohit';
 
   const handleDiscover = useCallback(() => {
     if (revealed) return;
@@ -37,296 +44,211 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section
-      id="hero"
-      style={{
-        position: 'relative',
-        minHeight: '100vh',
-        minHeight: '100dvh',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        overflow: 'hidden',
-        textAlign: 'center',
-        padding: 'calc(var(--nav-height) + 1rem) clamp(1rem, 4vw, 3rem) 2rem',
-      }}
-    >
-      {/* Top label */}
-      <motion.p
-        className="label"
-        custom={0}
-        initial="hidden"
-        animate="visible"
-        variants={textVariants}
-        style={{
-          marginBottom: 'clamp(0.8rem, 2vw, 1.5rem)',
-          color: 'var(--color-accent)',
-          fontSize: 'clamp(0.6rem, 1.5vw, 0.75rem)',
-        }}
-      >
-        TALKIVA
-      </motion.p>
+    <section id="hero" className="hero-section">
+      {/* Outer Main Glass Frame Container */}
+      <div className="hero-frame">
+        {/* Navbar inside top of frame */}
+        <Navbar onOpenChallenge={onOpenChallenge} />
 
-      {/* Headline — hides when topic is revealed */}
-      <AnimatePresence>
-        {!revealed && (
-          <motion.h1
-            custom={1}
-            initial="hidden"
-            animate="visible"
-            exit={{ opacity: 0, y: -20, height: 0, marginBottom: 0, transition: { duration: 0.4 } }}
-            variants={textVariants}
-            style={{
-              marginBottom: 'clamp(0.8rem, 2vw, 1.5rem)',
-              lineHeight: 1.1,
-              maxWidth: '700px',
-              padding: '0 0.5rem',
-            }}
-          >
-            One Topic.
-            <br />
-            One Camera.
-            <br />
-            <span style={{ color: 'var(--color-accent-dark)' }}>
-              One Step Better.
-            </span>
-          </motion.h1>
-        )}
-      </AnimatePresence>
-
-      {/* Subtitle — hides when topic is revealed */}
-      <AnimatePresence>
-        {!revealed && (
-          <motion.p
-            custom={2}
-            initial="hidden"
-            animate="visible"
-            exit={{ opacity: 0, y: -15, height: 0, marginBottom: 0, transition: { duration: 0.3 } }}
-            variants={textVariants}
-            style={{
-              fontSize: 'clamp(0.85rem, 2.5vw, 1.05rem)',
-              color: 'var(--color-text-secondary)',
-              maxWidth: '480px',
-              lineHeight: 1.6,
-              marginBottom: 'clamp(1rem, 3vw, 2rem)',
-              padding: '0 0.5rem',
-            }}
-          >
-            A daily challenge designed to help you think, speak, and become more confident.
-          </motion.p>
-        )}
-      </AnimatePresence>
-
-      {/* Motivational cycling text (idle only, hidden when topic revealed) */}
-      <AnimatePresence>
-        {!revealed && (
-          <motion.div
-            custom={2.5}
-            initial="hidden"
-            animate="visible"
-            exit={{ opacity: 0, scale: 0.95, transition: { duration: 0.3 } }}
-            variants={textVariants}
-            style={{
-              marginBottom: 'clamp(1.5rem, 4vw, 2.5rem)',
-              width: '100%',
-              maxWidth: '650px',
-            }}
-          >
-            <MotivationalHero />
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Revealed Topic — shown directly, no spinning */}
-      <AnimatePresence>
-        {revealed && (
-          <motion.div
-            key="topic-result"
-            initial={{ opacity: 0, y: 30, scale: 0.96 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -20, scale: 0.96 }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              gap: 'clamp(0.8rem, 2vw, 1.2rem)',
-              marginBottom: 'clamp(1.5rem, 4vw, 2.5rem)',
-              padding: '0 0.5rem',
-              maxWidth: '650px',
-              width: '100%',
-            }}
-          >
-            {/* Date */}
-            <motion.span
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.1, duration: 0.4 }}
-              style={{
-                fontFamily: 'var(--font-sans)',
-                fontSize: 'clamp(0.55rem, 1.5vw, 0.65rem)',
-                fontWeight: 600,
-                letterSpacing: '0.25em',
-                textTransform: 'uppercase',
-                color: 'var(--color-accent)',
-              }}
-            >
-              TODAY'S CHALLENGE — {displayDate}
-            </motion.span>
-
-            {/* Topic */}
-            <motion.h2
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.15, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              style={{
-                fontFamily: 'var(--font-serif)',
-                fontSize: 'clamp(1.6rem, 5.5vw, 3.2rem)',
-                fontWeight: 700,
-                lineHeight: 1.15,
-                color: 'var(--color-text-primary)',
-                letterSpacing: '-0.02em',
-                maxWidth: '600px',
-              }}
-            >
-              {topic}
-            </motion.h2>
-
-            {/* Divider */}
-            <motion.div
-              initial={{ width: 0 }}
-              animate={{ width: 50 }}
-              transition={{ delay: 0.25, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              style={{
-                height: '1.5px',
-                background: 'var(--color-accent)',
-              }}
-            />
-
-            {/* Time + encouragement */}
-            <motion.span
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.3, duration: 0.4 }}
-              style={{
-                fontFamily: 'var(--font-sans)',
-                fontSize: 'clamp(0.7rem, 2vw, 0.8rem)',
-                color: 'var(--color-text-muted)',
-                letterSpacing: '0.05em',
-              }}
-            >
-              Suggested time: 3–5 minutes
-            </motion.span>
-
-            <motion.span
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.35, duration: 0.4 }}
-              style={{
-                fontFamily: 'var(--font-serif)',
-                fontSize: 'clamp(0.85rem, 2.5vw, 1rem)',
-                fontStyle: 'italic',
-                color: 'var(--color-text-secondary)',
-                maxWidth: '420px',
-                lineHeight: 1.5,
-              }}
-            >
-              Don't prepare a perfect script. Think. Speak. Make mistakes.
-            </motion.span>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Buttons */}
-      <motion.div
-        custom={3}
-        initial="hidden"
-        animate="visible"
-        variants={textVariants}
-        style={{
-          width: '100%',
-          maxWidth: '320px',
-          padding: '0 1rem',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 'clamp(0.6rem, 2vw, 1rem)',
-          alignItems: 'center',
-        }}
-      >
         <AnimatePresence mode="wait">
           {revealed ? (
+            /* ── Revealed Topic View ───────────────────── */
             <motion.div
-              key="revealed-actions"
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: 'clamp(0.5rem, 2vw, 0.8rem)',
-                width: '100%',
-                alignItems: 'center',
-              }}
+              key="revealed-view"
+              className="hero-revealed"
+              initial={{ opacity: 0, y: 30, scale: 0.96 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -20, scale: 0.96 }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
             >
-              <button
-                className="btn-primary"
-                style={{ width: '100%', justifyContent: 'center' }}
-                onClick={() => {
-                  const el = document.getElementById('concept');
-                  if (el) el.scrollIntoView({ behavior: 'smooth' });
-                }}
+              <motion.span
+                className="hero-revealed__date"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.1 }}
               >
-                <span>START THE CHALLENGE</span>
-                <span className="arrow">→</span>
-              </button>
-              <button
-                onClick={handleReset}
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  fontFamily: 'var(--font-sans)',
-                  fontSize: '0.65rem',
-                  fontWeight: 500,
-                  letterSpacing: '0.12em',
-                  textTransform: 'uppercase',
-                  color: 'var(--color-text-muted)',
-                  cursor: 'pointer',
-                  padding: '0.5rem',
-                  transition: 'color 0.3s ease',
-                }}
-                onMouseEnter={(e) => (e.target.style.color = 'var(--color-accent)')}
-                onMouseLeave={(e) => (e.target.style.color = 'var(--color-text-muted)')}
+                {category?.toUpperCase()} • TOPIC #{id} — {displayDate}
+              </motion.span>
+
+              <motion.h2
+                className="hero-revealed__topic"
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.15 }}
               >
-                ← BACK TO HOME
-              </button>
+                {topic}
+              </motion.h2>
+
+              <motion.div
+                className="hero-revealed__line"
+                initial={{ width: 0 }}
+                animate={{ width: 80 }}
+                transition={{ delay: 0.25 }}
+              />
+
+              <motion.p
+                className="hero-revealed__quote"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.3 }}
+                style={{ fontStyle: 'normal', fontSize: '0.95rem', lineHeight: 1.6, color: 'rgba(255,255,255,0.92)' }}
+              >
+                💡 <strong>Speaking Prompt:</strong> {prompt}
+              </motion.p>
+
+              <motion.span
+                className="hero-revealed__meta"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.35 }}
+              >
+                Suggested practice duration: 3–5 minutes
+              </motion.span>
+
+              <motion.div
+                className="hero-revealed__actions"
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+              >
+                <button
+                  className="hero-pill-btn hero-pill-btn--solid"
+                  onClick={handleReset}
+                >
+                  ← BACK TO OVERVIEW
+                </button>
+              </motion.div>
             </motion.div>
           ) : (
+            /* ── Single Page Hero View ─────────── */
             <motion.div
-              key="discover-action"
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.3 }}
-              style={{ width: '100%' }}
+              key="hero-view"
+              className="hero-grid"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
             >
-              <button
-                className="btn-primary"
-                onClick={handleDiscover}
-                style={{
-                  width: '100%',
-                  justifyContent: 'center',
-                }}
-              >
-                <span>DISCOVER TODAY'S CHALLENGE</span>
-                <span className="arrow">→</span>
-              </button>
+              {/* Background Watermark Text "TALKIVA" */}
+              <div className="hero-watermark">TALKIVA</div>
+
+              {/* Left Column: Eyebrow + Headline + Carousel Dots + Social Links */}
+              <div className="hero-left">
+                <motion.div
+                  className="hero-eyebrow-container"
+                  custom={0}
+                  initial="hidden"
+                  animate="visible"
+                  variants={textVariants}
+                >
+                  <span className="hero-eyebrow-text">Daily challenge <strong>{displayDate}</strong></span>
+                  <div className="hero-eyebrow-line" />
+                </motion.div>
+
+                <motion.h1
+                  className="hero-title"
+                  custom={1}
+                  initial="hidden"
+                  animate="visible"
+                  variants={textVariants}
+                >
+                  Beginners
+                  <br />
+                  Guide to
+                  <br />
+                  <span className="hero-title__highlight">English fluency</span>
+                </motion.h1>
+
+                <motion.div
+                  className="hero-motivational-wrap"
+                  custom={1.5}
+                  initial="hidden"
+                  animate="visible"
+                  variants={textVariants}
+                >
+                  <MotivationalHero />
+                </motion.div>
+
+                {/* Dots indicator */}
+                <motion.div
+                  className="hero-dots-row"
+                  custom={2}
+                  initial="hidden"
+                  animate="visible"
+                  variants={textVariants}
+                >
+                  <span className="hero-dot hero-dot--active" />
+                  <span className="hero-dot" />
+                  <span className="hero-dot" />
+                  <span className="hero-dot" />
+                  <span className="hero-dot" />
+                </motion.div>
+
+                {/* Bottom Left Social Links */}
+                <motion.div
+                  className="hero-social-links"
+                  custom={3}
+                  initial="hidden"
+                  animate="visible"
+                  variants={textVariants}
+                >
+                  <span>FB</span>
+                  <span>TW</span>
+                  <span>IG</span>
+                  <span>IN</span>
+                </motion.div>
+              </div>
+
+              {/* Right Column: Avatars + Description + CTA Pill Button + Private Card if mohit */}
+              <div className="hero-right">
+                <motion.div
+                  className="hero-avatars"
+                  custom={1}
+                  initial="hidden"
+                  animate="visible"
+                  variants={textVariants}
+                >
+                  <div className="hero-avatar hero-avatar--1">👤</div>
+                  <div className="hero-avatar hero-avatar--2">👩‍💼</div>
+                  <div className="hero-avatar hero-avatar--3">👨‍🎓</div>
+                </motion.div>
+
+                <motion.p
+                  className="hero-description"
+                  custom={2}
+                  initial="hidden"
+                  animate="visible"
+                  variants={textVariants}
+                >
+                  <strong>Talkiva</strong> is a modern communication platform designed to help you improve English speaking, confidence, pronunciation, and fluency daily.
+                </motion.p>
+
+                <motion.div
+                  className="hero-cta-wrap"
+                  custom={3}
+                  initial="hidden"
+                  animate="visible"
+                  variants={textVariants}
+                >
+                  <button className="hero-pill-btn hero-pill-btn--outline" onClick={handleDiscover}>
+                    Get started
+                  </button>
+                </motion.div>
+
+                {/* PRIVATE FEATURE CARD — MOHIT ONLY */}
+                {isMohit && (
+                  <Challenge100Card onOpenChallenge={onOpenChallenge} />
+                )}
+
+                {/* Subtle caption text at bottom right */}
+                <div className="hero-right-caption" style={{ marginTop: '1.2rem' }}>
+                  Daily speaking missions • Interactive audio practice
+                </div>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
-      </motion.div>
-
+      </div>
     </section>
   );
 }

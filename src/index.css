@@ -1,6 +1,9 @@
 /* ============================================================
-   SPEAK CHALLENGE — Pure Pitch Black & Low-Poly Design System
+   TALKIVA — Global Styles
+   Soft Lavender/Purple Theme
    ============================================================ */
+
+@import './design-tokens.css';
 
 *,
 *::before,
@@ -11,119 +14,132 @@
 }
 
 :root {
-  /* Pure Pitch-Black Theme */
-  --color-bg: #000000;
-  --color-bg-warm: #050507;
-  --color-surface: #0A0C10;
-  --color-surface-hover: #12151F;
-  --color-text-primary: #FFFFFF;
-  --color-text-secondary: #A1A1AA;
-  --color-text-muted: #71717A;
+  /* Legacy compat aliases */
+  --color-bg: var(--t-bg-primary);
+  --color-surface: var(--t-bg-dark);
+  --color-surface-hover: var(--t-bg-deeper);
+  --color-text-primary: var(--t-text-primary);
+  --color-text-secondary: var(--t-text-secondary);
+  --color-text-muted: var(--t-text-muted);
+  --color-border: var(--t-border);
+  --color-accent: var(--t-electric);
+  --color-accent-dark: var(--t-violet);
+  --color-prism-cyan: var(--t-cyan);
+  --color-prism-magenta: var(--t-rose);
+  --color-prism-violet: var(--t-violet);
+  --color-prism-gold: var(--t-amber);
 
-  /* Neon Prism Colors */
-  --color-prism-cyan: #00F2FE;
-  --color-prism-magenta: #FF007F;
-  --color-prism-violet: #7928CA;
-  --color-prism-gold: #FFB703;
-  --color-silver: #E4E4E7;
+  --font-serif: var(--t-font-heading);
+  --font-sans: var(--t-font-body);
 
-  --color-border: rgba(255, 255, 255, 0.12);
-  --color-border-glow: rgba(0, 242, 254, 0.4);
+  --space-xs: var(--t-space-xs);
+  --space-sm: var(--t-space-md);
+  --space-md: var(--t-space-lg);
+  --space-lg: var(--t-space-xl);
+  --space-xl: var(--t-space-2xl);
+  --space-2xl: var(--t-space-3xl);
+  --space-3xl: var(--t-space-4xl);
 
-  /* Typography */
-  --font-serif: 'Playfair Display', 'Georgia', serif;
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-
-  /* Spacing Scale */
-  --space-xs: 0.5rem;
-  --space-sm: 1rem;
-  --space-md: 1.5rem;
-  --space-lg: 2rem;
-  --space-xl: 3rem;
-  --space-2xl: 4rem;
-
-  /* Layout */
-  --max-width: 1300px;
-  --nav-height: 76px;
+  --max-width: var(--t-max-width);
+  --nav-height: var(--t-nav-height);
 }
 
 html, body {
   width: 100%;
   height: 100%;
-  background-color: #000000 !important;
-  color: var(--color-text-primary);
-  font-family: var(--font-sans);
-  line-height: 1.6;
+  background: var(--t-gradient-bg) !important;
+  background-attachment: fixed !important;
+  color: var(--t-text-primary);
+  font-family: var(--t-font-body);
+  line-height: 1.65;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 #root {
   min-height: 100vh;
-  background-color: #000000;
 }
 
-/* ---- Typography ---- */
+/* ── Typography ──────────────────────────────────────── */
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-serif);
+  font-family: var(--t-font-heading);
   font-weight: 800;
   line-height: 1.15;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
+  color: var(--t-text-primary);
 }
 
 p {
-  font-family: var(--font-sans);
+  font-family: var(--t-font-body);
   font-weight: 400;
+  color: var(--t-text-secondary);
 }
 
-/* ---- Pure Pitch Black Glass Cards ---- */
+a {
+  color: #FFFFFF;
+  text-decoration: none;
+  transition: opacity var(--t-duration-fast) ease;
+}
+
+a:hover {
+  opacity: 0.8;
+}
+
+/* ── Legacy Glass Cards ────────────────────────────── */
 .pure-black-card {
-  background: rgba(8, 10, 14, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 16px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  background: var(--t-surface-card);
+  border: 1px solid var(--t-border);
+  border-radius: var(--t-radius-xl);
+  box-shadow: var(--t-shadow-lg);
   backdrop-filter: blur(20px);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  -webkit-backdrop-filter: blur(20px);
+  transition: border-color var(--t-duration-normal) ease,
+              box-shadow var(--t-duration-normal) ease;
 }
 
 .pure-black-card:hover {
-  border-color: rgba(0, 242, 254, 0.35);
-  box-shadow: 0 20px 60px rgba(0, 242, 254, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  border-color: var(--t-border-hover);
+  box-shadow: var(--t-shadow-xl), var(--t-shadow-glow-violet);
 }
 
-/* ---- Buttons ---- */
+/* ── Legacy Buttons ─────────────────────────────────── */
 .btn-primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--space-xs);
-  padding: 0.8rem 1.8rem;
-  font-family: var(--font-sans);
-  font-size: 0.8rem;
+  gap: var(--t-space-xs);
+  padding: 0.9rem 2rem;
+  font-family: var(--t-font-body);
+  font-size: 0.82rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: #FFFFFF;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1.5px solid rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
+  background: var(--t-gradient-primary);
+  background-size: 200% 200%;
+  border: none;
+  border-radius: var(--t-radius-md);
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all var(--t-duration-normal) var(--t-ease-out);
   position: relative;
   overflow: hidden;
+  box-shadow: 0 4px 20px rgba(91, 77, 199, 0.35);
 }
 
 .btn-primary:hover {
-  background: rgba(0, 242, 254, 0.12);
-  border-color: var(--color-prism-cyan);
-  box-shadow: 0 0 25px rgba(0, 242, 254, 0.4);
   transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(91, 77, 199, 0.5);
 }
 
-/* ---- Animations ---- */
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+/* ── Animations ─────────────────────────────────────── */
 @keyframes neonGlow {
-  0%, 100% { box-shadow: 0 0 15px rgba(0, 242, 254, 0.3); }
-  50% { box-shadow: 0 0 30px rgba(255, 0, 127, 0.5); }
+  0%, 100% { box-shadow: 0 0 15px rgba(91, 77, 199, 0.3); }
+  50% { box-shadow: 0 0 30px rgba(124, 106, 219, 0.5); }
 }
 
 @keyframes pulseRecording {
@@ -139,7 +155,7 @@ p {
 
 .audio-bar {
   width: 4px;
-  background: var(--color-prism-cyan);
+  background: var(--t-electric);
   border-radius: 2px;
   animation: equalize 1s infinite ease-in-out alternate;
 }
@@ -149,20 +165,26 @@ p {
   100% { height: 24px; }
 }
 
-/* ---- Scrollbar ---- */
+/* ── Scrollbar ──────────────────────────────────────── */
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #000000;
+  background: var(--t-bg-dark);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.25);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-prism-cyan);
+  background: rgba(255, 255, 255, 0.45);
+}
+
+/* ── Selection ──────────────────────────────────────── */
+::selection {
+  background: rgba(91, 77, 199, 0.35);
+  color: #FFFFFF;
 }

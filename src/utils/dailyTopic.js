@@ -1,232 +1,148 @@
 // ============================================================
-// Daily Topic & Challenge Selection — Deterministic, IST
+// Daily Topic & Challenge Selection — 21 Structured Topics
+// One Day = One Topic (Cycles through Psychology, Science, Productivity, Tech)
 // ============================================================
 
-// ---- 30 Speaking Topics ----
-const SPEAKING_TOPICS = [
-  "Is alcohol more harmful than beneficial?",
-  "What is your favorite movie and why?",
-  "Why is mob lynching a serious threat to society?",
-  "Is casteism still a major problem in India?",
-  "How does going to the gym benefit our lives?",
-  "Does religion unite people or divide them?",
-  "Why is corruption a major problem in our country?",
-  "Which is more important — sports or education?",
-  "Which is more valuable — knowledge or money?",
-  "Is failure necessary for achieving success?",
-  "Why is it so difficult to leave our comfort zone?",
-  "Is overthinking useful or harmful?",
-  "What is more important — motivation or discipline?",
-  "Can failure actually make a person successful?",
-  "What would you do if you became invisible for one day?",
-  "What would happen if everyone told the truth for 24 hours?",
-  "What would you do if you could travel back in time?",
-  "Should everyone learn how to manage money?",
-  "Is having many friends better than having a few close friends?",
-  "What makes a person truly successful?",
-  "What does success really mean?",
-  "What is one lesson you learned the hard way?",
-  "What is more important — talent or hard work?",
-  "Should we follow our passion or choose a stable career?",
-  "What is your biggest fear, and how can people overcome fear?",
-  "What would your ideal life look like?",
-  "What is one habit that can change a person's life?",
-  "Is being busy the same as being productive?",
-  "How do small daily decisions shape our future?",
-  "What would you tell your younger self?",
-];
+export const DAILY_TOPICS = [
+  // 🧠 Psychology and Mind
+  {
+    id: 1,
+    title: "Cognitive Biases",
+    category: "Psychology and Mind",
+    prompt: "Explain how subconscious cognitive shortcuts like confirmation bias or availability heuristic affect human decision making, and how to stay objective.",
+  },
+  {
+    id: 2,
+    title: "Dopamine Detox",
+    category: "Psychology and Mind",
+    prompt: "Discuss how constant digital stimulation impacts focus and motivation, and why resetting your baseline dopamine receptors builds deep focus.",
+  },
+  {
+    id: 3,
+    title: "Flow State",
+    category: "Psychology and Mind",
+    prompt: "Describe the psychological phenomenon of peak immersion and effortless focus, and how individuals can design their routine to enter flow regularly.",
+  },
+  {
+    id: 4,
+    title: "Imposter Syndrome",
+    category: "Psychology and Mind",
+    prompt: "Analyze why high achievers often doubt their accomplishments and feel like frauds, and discuss practical strategies to overcome this mindset.",
+  },
+  {
+    id: 5,
+    title: "Habits and Behavior Change",
+    category: "Psychology and Mind",
+    prompt: "Break down the habit loop (cue, craving, response, reward) and explain how small 1% daily changes compound into major long-term transformations.",
+  },
 
-// ---- 25 Real-Life Challenges ----
-export const REAL_LIFE_CHALLENGES = [
+  // 🚀 Science and Space
   {
-    title: "Make a Complete Day Vlog in English",
-    description: "Record your day naturally and explain what you are doing, thinking, and experiencing. Capture real moments — not staged perfection.",
-    category: "Experience",
-    difficulty: "Medium",
-    duration: "Full Day",
+    id: 6,
+    title: "The Fermi Paradox",
+    category: "Science and Space",
+    prompt: "If billions of Earth-like planets exist, where is everybody? Explain the contradiction between high extraterrestrial probability and lack of evidence.",
   },
   {
-    title: "Give a Speech in Front of People",
-    description: "Speak for 2–5 minutes in front of your friends, family, or classmates about any topic. No slides, no script — just you and your thoughts.",
-    category: "Comfort Zone",
-    difficulty: "Hard",
-    duration: "10–30 Minutes",
+    id: 7,
+    title: "Quantum Entanglement",
+    category: "Science and Space",
+    prompt: "Explain Einstein's 'spooky action at a distance' where entangled particles instantaneously affect each other regardless of physical separation distance.",
   },
   {
-    title: "Go Somewhere Alone",
-    description: "Visit a new place alone and handle the experience yourself — planning, decisions, and activities. Discover what it feels like to rely only on yourself.",
-    category: "Independence",
-    difficulty: "Medium",
-    duration: "Flexible",
+    id: 8,
+    title: "Time Dilation",
+    category: "Science and Space",
+    prompt: "Discuss how speed and gravitational fields slow down time according to relativity theory, and what this implies for space exploration.",
   },
   {
-    title: "Spend 24 Hours Without Social Media",
-    description: "Disconnect from Instagram, YouTube Shorts, Facebook, and other social media platforms for one day. At the end, reflect on what changed and what you learned.",
-    category: "Digital Detox",
-    difficulty: "Medium",
-    duration: "24 Hours",
+    id: 9,
+    title: "Dark Matter and Dark Energy",
+    category: "Science and Space",
+    prompt: "Explain the mysterious forces that make up 95% of the universe's mass-energy budget while remaining invisible to modern telescopes.",
   },
   {
-    title: "Learn Something Completely New in One Day",
-    description: "Choose something you have never done before — a skill, recipe, exercise, creative activity, or practical task. Learn it and achieve something by the end of the day.",
-    category: "Learning",
-    difficulty: "Medium",
-    duration: "One Day",
+    id: 10,
+    title: "CRISPR and Gene Editing",
+    category: "Science and Space",
+    prompt: "Discuss the revolutionary gene-editing technology, its medical potential for curing genetic diseases, and the ethical boundaries humanity must set.",
+  },
+
+  // ⚡ Productivity and Life Skills
+  {
+    id: 11,
+    title: "The Pomodoro Technique",
+    category: "Productivity and Life Skills",
+    prompt: "Break down the 25-minute sprint strategy for maintaining intense focus, preventing mental burnout, and boosting daily output.",
   },
   {
-    title: "Start a Conversation With Someone You Normally Don't Talk To",
-    description: "Start a genuine conversation with a classmate, neighbour, acquaintance, or someone already in your environment whom you normally do not talk to.",
-    category: "Comfort Zone",
-    difficulty: "Medium",
-    duration: "Flexible",
+    id: 12,
+    title: "Minimalism",
+    category: "Productivity and Life Skills",
+    prompt: "Explore how intentionally eliminating physical, mental, and digital clutter creates freedom, clarity, and intentional living.",
   },
   {
-    title: "Do Something You've Been Postponing",
-    description: "Choose one important task you have been avoiding for a long time. Stop waiting for the perfect time and complete it today.",
-    category: "Discipline",
-    difficulty: "Medium",
-    duration: "Flexible",
+    id: 13,
+    title: "Compound Effect",
+    category: "Productivity and Life Skills",
+    prompt: "Explain how small, smart choices executed consistently over long periods yield massive exponential returns in health, wealth, and skills.",
   },
   {
-    title: "Explore a New Place",
-    description: "Choose a safe place or area you have not explored properly. Go there and discover something new about your surroundings.",
-    category: "Exploration",
-    difficulty: "Easy",
-    duration: "Flexible",
+    id: 14,
+    title: "Stoicism",
+    category: "Productivity and Life Skills",
+    prompt: "Discuss the ancient philosophy of controlling what you can, accepting what you cannot, and transforming adversity into fuel for personal growth.",
   },
   {
-    title: "Record One Video Without Preparation or Retakes",
-    description: "Choose a topic, press record, and speak without stopping, restarting, editing, or deleting mistakes. Raw, unfiltered, real.",
-    category: "Confidence",
-    difficulty: "Hard",
-    duration: "5–10 Minutes",
+    id: 15,
+    title: "Speed Reading",
+    category: "Productivity and Life Skills",
+    prompt: "Explain the techniques for increasing reading speed and comprehension through visual pacing, eliminating subvocalization, and active scanning.",
+  },
+
+  // 🤖 Technology and Future
+  {
+    id: 16,
+    title: "Artificial Intelligence and Ethics",
+    category: "Technology and Future",
+    prompt: "Debate the societal impact of generative AI, algorithmic bias, job displacement, and the responsibility of developers to align AI with human values.",
   },
   {
-    title: "Watch the Sunrise",
-    description: "Wake up early enough to watch the sunrise. Avoid using your phone during the experience. Simply observe your surroundings and spend some time thinking.",
-    category: "Experience",
-    difficulty: "Easy",
-    duration: "Morning",
+    id: 17,
+    title: "Deepfakes and Digital Trust",
+    category: "Technology and Future",
+    prompt: "Analyze the rise of synthetic media, hyper-realistic voice and video clones, and how society can protect truth and security in the digital age.",
   },
   {
-    title: "Change Your Routine for One Day",
-    description: "Take a different route, try a new activity, change your schedule, or spend your free time differently. The goal is to break automatic habits.",
-    category: "Personal Growth",
-    difficulty: "Easy",
-    duration: "One Day",
+    id: 18,
+    title: "Neuralink and Brain-Computer Interfaces",
+    category: "Technology and Future",
+    prompt: "Explore direct communication between the human brain and external computers, its medical potential, and future human augmentation implications.",
   },
   {
-    title: "Finish What You Started",
-    description: "Choose an unfinished task, project, book, course, or activity. Make meaningful progress and avoid abandoning it halfway.",
-    category: "Discipline",
-    difficulty: "Medium",
-    duration: "Flexible",
+    id: 19,
+    title: "Blockchain Beyond Cryptocurrency",
+    category: "Technology and Future",
+    prompt: "Examine how decentralized, tamper-proof digital ledgers can transform supply chains, voting integrity, digital identity, and smart contracts.",
   },
   {
-    title: "The No Excuses Challenge",
-    description: "Choose something you usually avoid because you feel lazy, tired, scared, or unmotivated. Do it today without making excuses.",
-    category: "Discipline",
-    difficulty: "Hard",
-    duration: "One Day",
+    id: 20,
+    title: "Cryptocurrency",
+    category: "Technology and Future",
+    prompt: "Discuss decentralized digital currencies, peer-to-peer financial systems, inflation hedges, and the global economic implications of crypto adoption.",
   },
   {
-    title: "Learn and Teach",
-    description: "Learn something you currently do not understand. Then explain it clearly to a friend, family member, classmate, or the camera. The goal is to understand it well enough to teach it.",
-    category: "Learning",
-    difficulty: "Medium",
-    duration: "Flexible",
-  },
-  {
-    title: "Spend One Day Without Entertainment Content",
-    description: "Avoid unnecessary entertainment — scrolling, short videos, binge-watching, and gaming. Use the extra time to do something meaningful.",
-    category: "Digital Detox",
-    difficulty: "Hard",
-    duration: "One Day",
-  },
-  {
-    title: "Create Something From Start to Finish",
-    description: "Create something completely from start to finish — a website, drawing, video, presentation, useful tool, or written piece. Start with nothing. Finish with something.",
-    category: "Creativity",
-    difficulty: "Hard",
-    duration: "One Day",
-  },
-  {
-    title: "Go Out Alone Without Constantly Using Your Phone",
-    description: "Go outside alone for coffee, food, a walk, or another activity. Avoid spending the entire time scrolling on your phone. Observe your surroundings.",
-    category: "Independence",
-    difficulty: "Medium",
-    duration: "Flexible",
-  },
-  {
-    title: "Spend Meaningful Time With Someone You Know",
-    description: "Spend time with a family member or friend. Ask them about an important experience or memory from their life. Listen carefully and reflect on what you learned.",
-    category: "Experience",
-    difficulty: "Easy",
-    duration: "Flexible",
-  },
-  {
-    title: "The Long Walk Exploration Challenge",
-    description: "Go for a long walk and explore areas you normally ignore. Do not focus only on reaching a destination. Pay attention to your surroundings.",
-    category: "Exploration",
-    difficulty: "Easy",
-    duration: "Flexible",
-  },
-  {
-    title: "Make One Decision You've Been Avoiding",
-    description: "Choose one decision you have been overthinking. Think about it reasonably and then take action instead of waiting for perfect certainty.",
-    category: "Comfort Zone",
-    difficulty: "Medium",
-    duration: "Flexible",
-  },
-  {
-    title: "Start Your Day Without Your Phone",
-    description: "Do not check your phone for the first few hours after waking up. Complete your morning routine before consuming any content.",
-    category: "Discipline",
-    difficulty: "Medium",
-    duration: "Morning",
-  },
-  {
-    title: "Deep Focus Session",
-    description: "Choose one important task. Work on it with complete focus without checking social media, notifications, or unrelated content for 1–3 hours.",
-    category: "Discipline",
-    difficulty: "Medium",
-    duration: "1–3 Hours",
-  },
-  {
-    title: "Do Something Without Trying to Make It Perfect",
-    description: "Choose something you usually overthink or delay because you want it to be perfect. Complete it without constantly correcting or restarting.",
-    category: "Comfort Zone",
-    difficulty: "Medium",
-    duration: "Flexible",
-  },
-  {
-    title: "Become a Creator for One Day",
-    description: "Spend one day creating instead of only consuming content. Create something meaningful and finish it before the day ends.",
-    category: "Creativity",
-    difficulty: "Hard",
-    duration: "One Day",
-  },
-  {
-    title: "Run a Personal Experiment",
-    description: "Choose one habit and change it for the day — no phone during meals, no complaining, no unnecessary scrolling, no procrastination. At the end, reflect on what changed.",
-    category: "Self-Discovery",
-    difficulty: "Medium",
-    duration: "One Day",
+    id: 21,
+    title: "The Metaverse",
+    category: "Technology and Future",
+    prompt: "Describe persistent, interconnected 3D virtual spaces and evaluate whether immersive spatial computing will replace traditional 2D web interfaces.",
   },
 ];
 
-// ---- Hash Function ----
-function hashString(str) {
-  let hash = 0;
-  for (let i = 0; i < str.length; i++) {
-    const char = str.charCodeAt(i);
-    hash = (hash << 5) - hash + char;
-    hash |= 0;
-  }
-  return Math.abs(hash);
-}
+// Array of simple topic titles for quick index access
+export const SPEAKING_TOPICS = DAILY_TOPICS.map(t => t.title);
 
-// ---- IST Date ----
+// ---- IST Date Calculation ----
 function getISTDate() {
   const now = new Date();
   const formatter = new Intl.DateTimeFormat("en-US", {
@@ -242,20 +158,31 @@ function getISTDate() {
   return { year: +year, month: +month, day: +day };
 }
 
+// ---- Calculate Day Index (1 Topic Per Day) ----
+function getDayOfYear(year, month, day) {
+  const start = new Date(year, 0, 0);
+  const current = new Date(year, month - 1, day);
+  const diff = current - start;
+  const oneDay = 1000 * 60 * 60 * 24;
+  return Math.floor(diff / oneDay);
+}
+
 // ---- Public API ----
 
 export function getDailyTopic() {
   const { year, month, day } = getISTDate();
-  const dateKey = `${year}-${month}-${day}`;
-  const index = hashString(dateKey) % SPEAKING_TOPICS.length;
-  return { topic: SPEAKING_TOPICS[index], date: { year, month, day }, index };
-}
-
-export function getDailyChallenge() {
-  const { year, month, day } = getISTDate();
-  const dateKey = `real-life-challenge-${year}-${month}-${day}`;
-  const index = hashString(dateKey) % REAL_LIFE_CHALLENGES.length;
-  return { challenge: REAL_LIFE_CHALLENGES[index], index };
+  const dayOfYear = getDayOfYear(year, month, day);
+  // Exactly 1 topic per day, rotating through the 21 topics
+  const index = (dayOfYear - 1) % DAILY_TOPICS.length;
+  const item = DAILY_TOPICS[index];
+  return {
+    topic: item.title,
+    category: item.category,
+    prompt: item.prompt,
+    id: item.id,
+    date: { year, month, day },
+    index,
+  };
 }
 
 export function formatDisplayDate() {

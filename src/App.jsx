@@ -1,125 +1,71 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import Navbar from './sections/Navbar';
+import { AuthProvider, useAuth } from './context/AuthContext';
+import LoginPage from './pages/LoginPage';
 import HeroSection from './sections/HeroSection';
-import C2PronunciationSection from './sections/C2PronunciationSection';
-import TongueTwisterSection from './sections/TongueTwisterSection';
-import ImpromptuSpeechSection from './sections/ImpromptuSpeechSection';
-import ConceptSection from './sections/ConceptSection';
-import HowItWorksSection from './sections/HowItWorksSection';
-import MissionSection from './sections/MissionSection';
+import Challenge100Main from './components/Challenge100/Challenge100Main';
 import Footer from './sections/Footer';
 import LowPolyBackground from './components/LowPolyBackground';
 
 /**
- * App — Pure Pitch-Black Multi-View Router.
+ * AppContent — Main logged in application view.
  */
-export default function App() {
-  const [activeView, setActiveView] = useState('hero');
+function AppContent() {
+  const { currentUser, isLoading } = useAuth();
+  const [activeView, setActiveView] = useState('hero'); // 'hero' | 'challenge100'
 
-  const renderActiveView = () => {
-    switch (activeView) {
-      case 'c2':
-        return (
-          <motion.div
-            key="view-c2"
-            initial={{ opacity: 0, scale: 0.98, y: 15 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.98, y: -15 }}
-            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <C2PronunciationSection />
-          </motion.div>
-        );
-      case 'twisters':
-        return (
-          <motion.div
-            key="view-twisters"
-            initial={{ opacity: 0, scale: 0.98, y: 15 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.98, y: -15 }}
-            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <TongueTwisterSection />
-          </motion.div>
-        );
-      case 'impromptu':
-        return (
-          <motion.div
-            key="view-impromptu"
-            initial={{ opacity: 0, scale: 0.98, y: 15 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.98, y: -15 }}
-            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <ImpromptuSpeechSection />
-          </motion.div>
-        );
-      case 'concept':
-        return (
-          <motion.div
-            key="view-concept"
-            initial={{ opacity: 0, scale: 0.98, y: 15 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.98, y: -15 }}
-            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            style={{ paddingTop: 'var(--nav-height)' }}
-          >
-            <ConceptSection />
-          </motion.div>
-        );
-      case 'how-it-works':
-        return (
-          <motion.div
-            key="view-how-it-works"
-            initial={{ opacity: 0, scale: 0.98, y: 15 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.98, y: -15 }}
-            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            style={{ paddingTop: 'var(--nav-height)' }}
-          >
-            <HowItWorksSection />
-          </motion.div>
-        );
-      case 'mission':
-        return (
-          <motion.div
-            key="view-mission"
-            initial={{ opacity: 0, scale: 0.98, y: 15 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.98, y: -15 }}
-            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            style={{ paddingTop: 'var(--nav-height)' }}
-          >
-            <MissionSection />
-          </motion.div>
-        );
-      case 'hero':
-      default:
-        return (
-          <motion.div
-            key="view-hero"
-            initial={{ opacity: 0, scale: 0.98, y: 15 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.98, y: -15 }}
-            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <HeroSection />
-          </motion.div>
-        );
-    }
-  };
+  // Show nothing while restoring session
+  if (isLoading) return null;
+
+  // Gate: show login if not authenticated
+  if (!currentUser) {
+    return <LoginPage />;
+  }
+
+  const isMohit = currentUser?.id?.toLowerCase() === 'mohit';
 
   return (
-    <div style={{ background: '#000000', minHeight: '100vh', color: '#FFFFFF' }}>
+    <div style={{ minHeight: '100vh', color: '#FFFFFF', position: 'relative' }}>
       <LowPolyBackground />
-      <Navbar activeView={activeView} onSelectView={(viewId) => setActiveView(viewId)} />
+
       <main style={{ position: 'relative', zIndex: 1, minHeight: 'calc(100vh - 120px)' }}>
         <AnimatePresence mode="wait">
-          {renderActiveView()}
+          {activeView === 'challenge100' && isMohit ? (
+            <motion.div
+              key="view-challenge100"
+              initial={{ opacity: 0, scale: 0.98, y: 15 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.98, y: -15 }}
+              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <Challenge100Main onBackToHome={() => setActiveView('hero')} />
+            </motion.div>
+          ) : (
+            <motion.div
+              key="view-hero"
+              initial={{ opacity: 0, scale: 0.98, y: 15 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.98, y: -15 }}
+              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <HeroSection onOpenChallenge={() => isMohit && setActiveView('challenge100')} />
+            </motion.div>
+          )}
         </AnimatePresence>
       </main>
+
       <Footer />
     </div>
+  );
+}
+
+/**
+ * App — Root wrapper with AuthProvider.
+ */
+export default function App() {
+  return (
+    <AuthProvider>
+      <AppContent />
+    </AuthProvider>
   );
 }
