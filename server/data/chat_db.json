@@ -1,0 +1,51 @@
+{
+  "messages": [
+    {
+      "id": "msg-1",
+      "senderId": "Mohit",
+      "senderName": "Mohit Jangid",
+      "text": "Welcome to the Talkiva Group Chat! 🚀 Let's practice our daily speaking prompts together.",
+      "timestamp": "09:30 AM",
+      "reactions": {
+        "🔥": [
+          "Aashish",
+          "Ajay"
+        ]
+      }
+    },
+    {
+      "id": "msg-2",
+      "senderId": "Aashish",
+      "senderName": "Aashish",
+      "text": "Hey everyone! Ready for today's speaking challenge.",
+      "timestamp": "09:33 AM",
+      "reactions": {
+        "❤️": [
+          "Mohit"
+        ]
+      }
+    },
+    {
+      "id": "msg-3",
+      "senderId": "Ajay",
+      "senderName": "Ajay Choudhary",
+      "text": "Recorded a 2-minute voice note on today's prompt. Sounds much smoother than yesterday!",
+      "timestamp": "10:03 AM",
+      "reactions": {
+        "👏": [
+          "Mohit",
+          "Aashish"
+        ]
+      }
+    },
+    {
+      "id": "msg-1790401470762-62lx",
+      "senderId": "Aashish",
+      "senderName": "Aashish Sharma",
+      "senderAvatar": "",
+      "text": "hii",
+      "timestamp": "11:14 am",
+      "reactions": {}
+    }
+  ]
+}

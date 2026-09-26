@@ -565,6 +565,12 @@
   gap: 0.35rem;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
   z-index: 10;
+  white-space: nowrap;
+}
+
+.chat-message-row--self .chat-emoji-picker {
+  left: auto;
+  right: 0;
 }
 
 .chat-emoji-item {
