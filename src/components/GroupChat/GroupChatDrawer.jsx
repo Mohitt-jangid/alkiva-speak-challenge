@@ -2,6 +2,12 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../../context/AuthContext';
 import { getDailyTopic } from '../../utils/dailyTopic';
+import {
+  fetchChatMessagesApi,
+  sendChatMessageApi,
+  reactChatMessageApi,
+  deleteChatMessageApi
+} from '../../services/chatService';
 import './GroupChatDrawer.css';
 
 const USERS_LIST = [
@@ -134,8 +140,26 @@ export default function GroupChatDrawer({ isOpen, onClose }) {
     }
   }, [isOpen, messages, currentUser]);
 
-  // Broadcast sync setup
+  // Broadcast & backend API sync setup
   useEffect(() => {
+    let isMounted = true;
+
+    const syncMessages = async () => {
+      const latestMsgs = await fetchChatMessagesApi();
+      if (isMounted && latestMsgs) {
+        setMessages(latestMsgs);
+      }
+    };
+
+    // Initial sync
+    syncMessages();
+
+    // Poll every 2.5 seconds when drawer is open so messages sent on other devices appear live
+    let intervalId = null;
+    if (isOpen) {
+      intervalId = setInterval(syncMessages, 2500);
+    }
+
     if ('BroadcastChannel' in window) {
       const channel = new BroadcastChannel('talkiva_group_chat_channel');
       broadcastChannelRef.current = channel;
@@ -143,8 +167,7 @@ export default function GroupChatDrawer({ isOpen, onClose }) {
       channel.onmessage = (event) => {
         const { type } = event.data;
         if (type === 'NEW_MESSAGE' || type === 'UPDATE_REACTION' || type === 'DELETE_MESSAGE') {
-          const updated = loadStoredMessages();
-          setMessages(updated);
+          syncMessages();
         } else if (type === 'TYPING_START') {
           if (event.data.payload?.userId !== currentUser?.id) {
             setTypingUsers((prev) => Array.from(new Set([...prev, event.data.payload.userName])));
@@ -157,19 +180,21 @@ export default function GroupChatDrawer({ isOpen, onClose }) {
 
     const handleStorage = (e) => {
       if (e.key === 'talkiva_group_chat_messages') {
-        setMessages(loadStoredMessages());
+        syncMessages();
       }
     };
 
     window.addEventListener('storage', handleStorage);
 
     return () => {
+      isMounted = false;
+      if (intervalId) clearInterval(intervalId);
       window.removeEventListener('storage', handleStorage);
       if (broadcastChannelRef.current) {
         broadcastChannelRef.current.close();
       }
     };
-  }, [currentUser?.id]);
+  }, [currentUser?.id, isOpen]);
 
   // Scroll to bottom on new messages
   useEffect(() => {
@@ -186,7 +211,7 @@ export default function GroupChatDrawer({ isOpen, onClose }) {
   };
 
   // Handle Send Text Message
-  const handleSendMessage = (e) => {
+  const handleSendMessage = async (e) => {
     e?.preventDefault();
     if (!inputText.trim() || !currentUser) return;
 
@@ -202,23 +227,26 @@ export default function GroupChatDrawer({ isOpen, onClose }) {
       reactions: {},
     };
 
-    const updated = [...messages, newMsg];
-    saveMessages(updated);
-    broadcastAction('NEW_MESSAGE', newMsg);
     setInputText('');
     stopTyping();
+
+    const updated = await sendChatMessageApi(newMsg);
+    setMessages(updated);
+    broadcastAction('NEW_MESSAGE', newMsg);
   };
 
   const [isQuickMenuOpen, setIsQuickMenuOpen] = useState(false);
 
-  // Share Daily Prompt to Chat (RESTRICTED TO 1 PERSON PER DAY — NO ALERT POPUP)
-  const handleSharePrompt = () => {
+  // Share Daily Prompt to Chat
+  const handleSharePrompt = async () => {
     if (!currentUser || isAlreadySharedToday) return;
+
+    const displayName = currentUser.name || currentUser.id;
 
     const newMsg = {
       id: 'msg-prompt-' + Date.now(),
       senderId: currentUser.id,
-      senderName: currentUser.id,
+      senderName: displayName,
       isPromptShare: true,
       topicPrompt: todayTopic,
       shareDate: todayDateStr,
@@ -227,8 +255,8 @@ export default function GroupChatDrawer({ isOpen, onClose }) {
       reactions: { '🔥': [currentUser.id] },
     };
 
-    const updated = [...messages, newMsg];
-    saveMessages(updated);
+    const updated = await sendChatMessageApi(newMsg);
+    setMessages(updated);
     broadcastAction('NEW_MESSAGE', newMsg);
   };
 
@@ -299,12 +327,13 @@ export default function GroupChatDrawer({ isOpen, onClose }) {
     }
   };
 
-  const sendVoiceNoteMessage = (audioUrl, duration) => {
+  const sendVoiceNoteMessage = async (audioUrl, duration) => {
     if (!currentUser) return;
+    const displayName = currentUser.name || currentUser.id;
     const newMsg = {
       id: 'msg-audio-' + Date.now(),
       senderId: currentUser.id,
-      senderName: currentUser.id,
+      senderName: displayName,
       audioUrl: audioUrl,
       audioDuration: duration,
       text: '🎙️ Voice Note (' + duration + 's)',
@@ -312,47 +341,26 @@ export default function GroupChatDrawer({ isOpen, onClose }) {
       reactions: {},
     };
 
-    const updated = [...messages, newMsg];
-    saveMessages(updated);
+    const updated = await sendChatMessageApi(newMsg);
+    setMessages(updated);
     broadcastAction('NEW_MESSAGE', newMsg);
   };
 
   // Toggle Reaction on Message
-  const handleToggleReaction = (msgId, emoji) => {
+  const handleToggleReaction = async (msgId, emoji) => {
     if (!currentUser) return;
     const userName = currentUser.id;
 
-    const updated = messages.map((msg) => {
-      if (msg.id !== msgId) return msg;
-
-      const currentReactions = { ...msg.reactions };
-      const usersForEmoji = currentReactions[emoji] || [];
-
-      if (usersForEmoji.includes(userName)) {
-        // Remove user reaction
-        const nextUsers = usersForEmoji.filter((u) => u !== userName);
-        if (nextUsers.length === 0) {
-          delete currentReactions[emoji];
-        } else {
-          currentReactions[emoji] = nextUsers;
-        }
-      } else {
-        // Add user reaction
-        currentReactions[emoji] = [...usersForEmoji, userName];
-      }
-
-      return { ...msg, reactions: currentReactions };
-    });
-
-    saveMessages(updated);
+    const updated = await reactChatMessageApi(msgId, emoji, userName);
+    setMessages(updated);
     broadcastAction('UPDATE_REACTION', { msgId, emoji, userName });
     setActiveReactionMsgId(null);
   };
 
   // Delete message
-  const handleDeleteMessage = (msgId) => {
-    const updated = messages.filter((m) => m.id !== msgId);
-    saveMessages(updated);
+  const handleDeleteMessage = async (msgId) => {
+    const updated = await deleteChatMessageApi(msgId);
+    setMessages(updated);
     broadcastAction('DELETE_MESSAGE', { msgId });
   };
 
