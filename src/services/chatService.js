@@ -52,13 +52,15 @@ function saveLocalMessages(messages) {
   }
 }
 
+const AUTH_SIGNATURE = 'TALKIVA_AUTH_APP_SEC_2707';
+
 // Publish event to Cloud Relay for instant cross-device broadcast
 async function publishCloudEvent(eventType, payload) {
   try {
     await fetch(CLOUD_TOPIC_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ eventType, payload, timestamp: Date.now() })
+      body: JSON.stringify({ eventType, payload, authSignature: AUTH_SIGNATURE, timestamp: Date.now() })
     });
   } catch (err) {
     console.warn('Cloud relay publish failed:', err);
@@ -85,11 +87,29 @@ async function syncFromCloudRelay() {
       }
     });
 
-    lines.forEach((line) => {
+    for (const line of lines) {
       try {
         const item = JSON.parse(line);
-        if (item.event === 'message' && item.message) {
-          const body = JSON.parse(item.message);
+        if (item.event === 'message') {
+          let bodyStr = item.message;
+
+          // If payload was large (voice notes/attachments), fetch actual content from attachment URL
+          if (item.attachment && item.attachment.url) {
+            try {
+              const attachRes = await fetch(item.attachment.url);
+              if (attachRes.ok) {
+                bodyStr = await attachRes.text();
+              }
+            } catch (e) {
+              console.warn('Failed to fetch ntfy attachment:', e);
+            }
+          }
+
+          if (!bodyStr || typeof bodyStr !== 'string' || !bodyStr.trim().startsWith('{')) {
+            continue;
+          }
+
+          const body = JSON.parse(bodyStr);
           const { eventType, payload } = body;
 
           if (eventType === 'SEND_MSG' && payload?.id) {
@@ -118,10 +138,10 @@ async function syncFromCloudRelay() {
             currentMsgs = currentMsgs.filter((m) => m.id !== payload.messageId);
           }
         }
-      } catch {
-        // Skip malformed lines
+      } catch (err) {
+        // Skip unparseable lines
       }
-    });
+    }
 
     saveLocalMessages(currentMsgs);
     return currentMsgs;
@@ -132,22 +152,29 @@ async function syncFromCloudRelay() {
 }
 
 export async function fetchChatMessagesApi() {
-  // 1. First try Express API endpoint
+  // 1. Sync Cloud Relay stream to capture all cross-device & mobile messages
+  const cloudMsgs = await syncFromCloudRelay();
+  let mergedMsgs = [...cloudMsgs];
+
+  // 2. Merge with Express backend API if available
   try {
     const res = await fetch('/api/chat/messages');
     if (res.ok) {
       const data = await res.json();
-      if (data.success && data.messages && data.messages.length > 0) {
-        saveLocalMessages(data.messages);
-        return data.messages;
+      if (data.success && Array.isArray(data.messages)) {
+        data.messages.forEach((bm) => {
+          if (!mergedMsgs.some((m) => m.id === bm.id)) {
+            mergedMsgs.push(bm);
+          }
+        });
       }
     }
   } catch (err) {
-    console.warn('Backend API not reached for chat, syncing via Cloud Relay:', err);
+    console.warn('Backend API not reached for chat, relying on cloud relay:', err);
   }
 
-  // 2. Sync via Cloud Relay to capture cross-device messages sent by friends
-  return await syncFromCloudRelay();
+  saveLocalMessages(mergedMsgs);
+  return mergedMsgs;
 }
 
 export async function sendChatMessageApi(newMessage) {
