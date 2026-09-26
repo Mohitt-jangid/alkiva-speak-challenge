@@ -46,6 +46,21 @@ export default function ProfileModal({ isOpen, onClose }) {
     }
   }, [currentUser, isOpen]);
 
+  // Lock body scroll when profile modal is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+      document.body.style.touchAction = 'none';
+    } else {
+      document.body.style.overflow = '';
+      document.body.style.touchAction = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+      document.body.style.touchAction = '';
+    };
+  }, [isOpen]);
+
   if (!isOpen || !currentUser) return null;
 
   // Handle Gallery Image Pick

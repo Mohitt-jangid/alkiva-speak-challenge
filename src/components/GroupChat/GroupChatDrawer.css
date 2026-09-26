@@ -15,6 +15,8 @@
   z-index: 9999;
   display: flex;
   justify-content: flex-end;
+  overscroll-behavior: contain;
+  touch-action: none;
 }
 
 .chat-drawer {
@@ -30,6 +32,8 @@
   font-family: var(--t-font-body, "Inter", sans-serif);
   position: relative;
   overflow: hidden;
+  overscroll-behavior: contain;
+  touch-action: pan-y;
 }
 
 /* Header */
@@ -314,6 +318,9 @@
 .chat-messages-container {
   flex: 1;
   overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
   padding: 1rem 1.2rem;
   display: flex;
   flex-direction: column;
