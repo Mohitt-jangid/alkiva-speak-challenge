@@ -1,0 +1,504 @@
+/* ============================================================
+   DAILY DROP SECTION — Dark Cinematic Technology Styling
+   ============================================================ */
+
+.ig-challenge-section {
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 5rem 2rem;
+  font-family: var(--t-font-body);
+  color: #FFFFFF;
+}
+
+.ig-challenge-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+/* Header */
+.ig-challenge-header {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.ig-back-btn {
+  align-self: flex-start;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #FFFFFF;
+  padding: 0.4rem 1rem;
+  border-radius: 4px;
+  font-family: var(--t-font-heading);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 1rem;
+}
+
+.ig-back-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #FF5500;
+}
+
+.ig-header-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ig-badge-text {
+  font-family: var(--t-font-heading);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  color: #FF5500;
+  text-transform: uppercase;
+}
+
+.ig-challenge-title {
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0;
+  line-height: 1.1;
+}
+
+.ig-title-gradient {
+  color: #FF5500;
+}
+
+.ig-challenge-subtitle {
+  max-width: 680px;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #8E95A5;
+  margin: 0;
+}
+
+/* 3 Users Streaks Grid */
+.ig-streaks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.ig-user-card {
+  position: relative;
+  background: rgba(14, 16, 22, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 1.5rem;
+  backdrop-filter: blur(16px);
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ig-user-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 85, 0, 0.35);
+}
+
+.ig-user-card--self {
+  background: rgba(20, 23, 32, 0.95);
+  border-color: rgba(255, 85, 0, 0.4);
+}
+
+.ig-self-badge {
+  position: absolute;
+  top: -10px;
+  right: 16px;
+  background: #FF5500;
+  color: #FFFFFF;
+  font-family: var(--t-font-mono, monospace);
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  padding: 0.2rem 0.6rem;
+  border-radius: 2px;
+}
+
+.ig-user-avatar-wrap {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.ig-user-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  background: #1F232E !important;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.ig-user-name {
+  font-size: 1.1rem;
+  font-weight: 800;
+  margin: 0;
+  color: #FFFFFF;
+}
+
+.ig-user-role {
+  font-family: var(--t-font-mono, monospace);
+  font-size: 0.72rem;
+  color: #636A7A;
+}
+
+.ig-streak-box {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 6px;
+  padding: 1rem;
+  text-align: center;
+}
+
+.ig-streak-val {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+.ig-fire-icon {
+  font-size: 1.6rem;
+}
+
+.ig-streak-number {
+  font-family: var(--t-font-heading);
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #FBBF24;
+}
+
+.ig-streak-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #A0A6B5;
+  margin-left: 0.2rem;
+}
+
+.ig-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.8rem;
+}
+
+.ig-status-pill {
+  padding: 0.3rem 0.7rem;
+  border-radius: 4px;
+  font-family: var(--t-font-mono, monospace);
+  font-weight: 700;
+  font-size: 0.72rem;
+}
+
+.ig-status-pill--done {
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  color: #34D399;
+}
+
+.ig-status-pill--pending {
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  color: #FBBF24;
+}
+
+.ig-total-sub {
+  font-family: var(--t-font-mono, monospace);
+  color: #636A7A;
+}
+
+/* Submission Card */
+.ig-submit-card {
+  background: rgba(14, 16, 22, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.ig-card-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.ig-card-title-row h2 {
+  font-size: 1.2rem;
+  font-weight: 800;
+  margin: 0;
+}
+
+.ig-date-badge {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.3rem 0.8rem;
+  border-radius: 4px;
+  font-family: var(--t-font-mono, monospace);
+  font-size: 0.75rem;
+  color: #A0A6B5;
+}
+
+.ig-input-group {
+  display: flex;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+  padding: 0.35rem 0.4rem 0.35rem 1rem;
+  gap: 0.8rem;
+  transition: all 0.3s ease;
+}
+
+.ig-input-group:focus-within {
+  border-color: #FF5500;
+  box-shadow: 0 0 15px rgba(255, 85, 0, 0.25);
+}
+
+.ig-input-icon {
+  font-size: 1.1rem;
+}
+
+.ig-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #FFFFFF;
+  font-size: 0.95rem;
+  font-family: inherit;
+}
+
+.ig-input::placeholder {
+  color: #525866;
+}
+
+.ig-submit-btn {
+  background: linear-gradient(135deg, #FF5500 0%, #FF3E00 100%);
+  border: none;
+  color: #FFFFFF;
+  font-family: var(--t-font-heading);
+  font-weight: 800;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.75rem 1.6rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+  box-shadow: 0 4px 16px rgba(255, 85, 0, 0.35);
+}
+
+.ig-submit-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(255, 85, 0, 0.5);
+}
+
+.ig-submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.ig-submit-btn--done {
+  background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.3);
+}
+
+/* Feedback Box */
+.ig-feedback {
+  padding: 0.8rem 1.2rem;
+  border-radius: 4px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.ig-feedback--success {
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  color: #34D399;
+}
+
+.ig-feedback--error {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  color: #FCA5A5;
+}
+
+/* Submissions Log History Card */
+.ig-history-card {
+  background: rgba(14, 16, 22, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.ig-history-header h2 {
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.ig-history-header p {
+  font-size: 0.85rem;
+  color: #636A7A;
+  margin: 0.2rem 0 0 0;
+}
+
+.ig-tabs-row {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.ig-tab-btn {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #A0A6B5;
+  padding: 0.5rem 1.2rem;
+  border-radius: 4px;
+  font-family: var(--t-font-heading);
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ig-tab-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #FFFFFF;
+}
+
+.ig-tab-btn--active {
+  background: #FF5500;
+  border-color: #FF5500;
+  color: #FFFFFF;
+}
+
+.ig-history-empty {
+  padding: 2rem;
+  text-align: center;
+  color: #525866;
+  font-size: 0.9rem;
+}
+
+.ig-history-table {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.ig-history-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 0.8rem 1.2rem;
+  border-radius: 4px;
+  font-size: 0.88rem;
+}
+
+.ig-history-num {
+  font-family: var(--t-font-mono, monospace);
+  font-weight: 700;
+  color: #525866;
+  min-width: 30px;
+}
+
+.ig-history-date {
+  display: flex;
+  flex-direction: column;
+  min-width: 110px;
+  font-family: var(--t-font-mono, monospace);
+}
+
+.ig-date-tag {
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.ig-time-tag {
+  font-size: 0.72rem;
+  color: #525866;
+}
+
+.ig-history-link {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ig-history-link a {
+  color: #FF6611;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.ig-history-link a:hover {
+  text-decoration: underline;
+}
+
+.ig-history-badge {
+  font-family: var(--t-font-mono, monospace);
+  font-size: 0.72rem;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: #34D399;
+  padding: 0.2rem 0.6rem;
+  border-radius: 2px;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .ig-challenge-section {
+    padding: 2.5rem 1rem;
+  }
+  .ig-streaks-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .ig-input-group {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0.8rem;
+  }
+  .ig-submit-btn {
+    width: 100%;
+    text-align: center;
+  }
+  .ig-history-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
+  }
+  .ig-history-link {
+    width: 100%;
+  }
+}
+

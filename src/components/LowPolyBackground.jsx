@@ -3,8 +3,8 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
 /**
- * LowPolyBackground — Soft Lavender/Periwinkle Theme with floating 3D geometric shapes
- * Matching the exact visual style from the reference image (top-left icosahedron, top-right sphere, bottom-right cone).
+ * LowPolyBackground — Dark Cinematic 3D Ambient System
+ * Dark metallic geometric shapes with warm orange/amber studio lighting.
  */
 
 /* Faceted Icosahedron (Top-Left) */
@@ -14,9 +14,9 @@ function TopLeftPolyhedron() {
 
   useFrame((state, delta) => {
     if (meshRef.current) {
-      meshRef.current.rotation.y += delta * 0.2;
-      meshRef.current.rotation.x += delta * 0.1;
-      meshRef.current.position.y = 3.6 + Math.sin(state.clock.elapsedTime * 0.8) * 0.15;
+      meshRef.current.rotation.y += delta * 0.15;
+      meshRef.current.rotation.x += delta * 0.08;
+      meshRef.current.position.y = 3.6 + Math.sin(state.clock.elapsedTime * 0.7) * 0.15;
     }
   });
 
@@ -24,9 +24,11 @@ function TopLeftPolyhedron() {
     <mesh ref={meshRef} geometry={geom} position={[-5.8, 3.6, -1]}>
       <meshStandardMaterial
         flatShading={true}
-        color="#C4B9FB"
-        roughness={0.2}
-        metalness={0.4}
+        color="#1E222D"
+        roughness={0.3}
+        metalness={0.8}
+        emissive="#3A1800"
+        emissiveIntensity={0.2}
       />
     </mesh>
   );
@@ -39,8 +41,8 @@ function TopRightSphere() {
 
   useFrame((state, delta) => {
     if (meshRef.current) {
-      meshRef.current.rotation.y += delta * 0.3;
-      meshRef.current.position.y = 2.2 + Math.sin(state.clock.elapsedTime * 1.1) * 0.12;
+      meshRef.current.rotation.y += delta * 0.25;
+      meshRef.current.position.y = 2.2 + Math.sin(state.clock.elapsedTime * 1.0) * 0.12;
     }
   });
 
@@ -48,9 +50,9 @@ function TopRightSphere() {
     <mesh ref={meshRef} geometry={geom} position={[4.2, 2.2, 0]}>
       <meshStandardMaterial
         flatShading={true}
-        color="#E4DCFF"
-        roughness={0.15}
-        metalness={0.5}
+        color="#2A2F3D"
+        roughness={0.25}
+        metalness={0.85}
       />
     </mesh>
   );
@@ -59,45 +61,22 @@ function TopRightSphere() {
 /* Faceted Cone (Bottom-Right) */
 function BottomRightCone() {
   const meshRef = useRef();
-  const geom = useMemo(() => new THREE.ConeGeometry(1.0, 2.0, 8), []);
+  const geom = useMemo(() => new THREE.ConeGeometry(1.2, 2.4, 6), []);
 
   useFrame((state, delta) => {
     if (meshRef.current) {
-      meshRef.current.rotation.z = -0.6 + Math.sin(state.clock.elapsedTime * 0.7) * 0.08;
-      meshRef.current.rotation.y += delta * 0.25;
+      meshRef.current.rotation.y += delta * 0.2;
       meshRef.current.position.y = -3.2 + Math.cos(state.clock.elapsedTime * 0.9) * 0.15;
     }
   });
 
   return (
-    <mesh ref={meshRef} geometry={geom} position={[5.2, -3.2, 0]} rotation={[0.4, 0, -0.6]}>
+    <mesh ref={meshRef} geometry={geom} position={[5.5, -3.2, -0.5]} rotation={[0.4, 0, 0.2]}>
       <meshStandardMaterial
         flatShading={true}
-        color="#B9C7FC"
-        roughness={0.25}
-        metalness={0.4}
-      />
-    </mesh>
-  );
-}
-
-/* Small shiny blue marble (Center-Left) */
-function FloatingMarble() {
-  const meshRef = useRef();
-  const geom = useMemo(() => new THREE.SphereGeometry(0.35, 32, 32), []);
-
-  useFrame((state) => {
-    if (meshRef.current) {
-      meshRef.current.position.y = -1.8 + Math.sin(state.clock.elapsedTime * 1.5) * 0.1;
-    }
-  });
-
-  return (
-    <mesh ref={meshRef} geometry={geom} position={[-4.5, -1.8, 1]}>
-      <meshStandardMaterial
-        color="#A1C4FE"
-        roughness={0.1}
-        metalness={0.8}
+        color="#1A1D26"
+        roughness={0.3}
+        metalness={0.7}
       />
     </mesh>
   );
@@ -112,33 +91,25 @@ export default function LowPolyBackground() {
         left: 0,
         width: '100vw',
         height: '100vh',
-        pointerEvents: 'none',
         zIndex: 0,
+        pointerEvents: 'none',
+        overflow: 'hidden',
       }}
     >
-      {/* Soft gradient overlay matching periwinkle lavender theme */}
-      <div
-        style={{
-          position: 'absolute',
-          inset: 0,
-          background: 'linear-gradient(135deg, #A89CF5 0%, #9485E9 40%, #8271E0 100%)',
-          zIndex: -1,
-        }}
-      />
-
       <Canvas
         camera={{ position: [0, 0, 8], fov: 45 }}
-        style={{ position: 'absolute', inset: 0 }}
+        style={{ width: '100%', height: '100%' }}
+        gl={{ antialias: true, alpha: true }}
       >
-        <ambientLight intensity={0.75} color="#FFFFFF" />
-        <directionalLight position={[5, 8, 5]} intensity={1.5} color="#FFFFFF" />
-        <pointLight position={[-6, 4, 4]} color="#B8ACFF" intensity={2} />
-        <pointLight position={[6, -4, 4]} color="#6495ED" intensity={2} />
-
+        <ambientLight intensity={0.3} color="#FFFFFF" />
+        {/* Warm Orange Accent Underlight */}
+        <pointLight position={[0, -4, 4]} intensity={2.5} color="#FF5500" distance={12} />
+        {/* Crisp Top Cool Rim Light */}
+        <directionalLight position={[-5, 5, 5]} intensity={1.2} color="#A0B0D0" />
+        
         <TopLeftPolyhedron />
         <TopRightSphere />
         <BottomRightCone />
-        <FloatingMarble />
       </Canvas>
     </div>
   );

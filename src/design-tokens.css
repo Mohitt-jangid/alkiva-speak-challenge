@@ -1,222 +1,61 @@
 /* ============================================================
-   TALKIVA — Premium Design Tokens
-   Soft Lavender/Purple Theme (matching reference)
+   TALKIVA — Dark Cinematic Technology Design System
+   Visual Reference: High-End Technology & Product Design (DRN OS Aesthetic)
    ============================================================ */
 
 :root {
-  /* ── Primary Palette — Soft Lavender/Purple ──────────── */
-  --t-bg-primary:    #B8A4E8;
-  --t-bg-light:      #C8B8F0;
-  --t-bg-dark:       #A78BDF;
-  --t-bg-deeper:     #9578D3;
-  --t-bg-deepest:    #7B60C4;
+  /* ── Background Palette — Dark Cinematic Matte ───────────── */
+  --t-bg-primary:    #07080B;
+  --t-bg-light:      #0D0E12;
+  --t-bg-dark:       #050608;
+  --t-bg-deeper:     #030304;
+  --t-bg-deepest:    #000000;
 
-  /* ── Brand Blues ─────────────────────────────────────── */
-  --t-electric:      #5B4DC7;
-  --t-violet:        #7C6ADB;
-  --t-cyan:          #6BB8E0;
-  --t-lavender:      #D4C8F5;
-  --t-lavender-soft: #E8E0FA;
+  /* ── Accent Highlights — Vibrant Orange / Red Glow ────────── */
+  --t-orange-primary: #FF5500;
+  --t-orange-bright:  #FF6B00;
+  --t-orange-glow:    rgba(255, 85, 0, 0.4);
+  --t-orange-subtle:  rgba(255, 85, 0, 0.12);
+  --t-amber:          #F59E0B;
+  --t-emerald:        #10B981;
+  --t-rose:           #EF4444;
 
-  /* ── Accent Colors ───────────────────────────────────── */
-  --t-coral:         #FF7A59;
-  --t-orange:        #FFB36B;
-  --t-emerald:       #10B981;
-  --t-emerald-light: #34D399;
-  --t-rose:          #F43F5E;
-  --t-amber:         #F59E0B;
+  /* ── Surface / Technical Panel Colors ──────────────────────── */
+  --t-surface-1:     rgba(16, 18, 24, 0.85);
+  --t-surface-2:     rgba(22, 25, 34, 0.75);
+  --t-surface-3:     rgba(28, 32, 44, 0.65);
+  --t-surface-glass: rgba(14, 16, 22, 0.85);
+  --t-surface-card:  rgba(15, 17, 23, 0.9);
+  --t-surface-card-solid: #0E1015;
 
-  /* ── Surface / Glass Colors ──────────────────────────── */
-  --t-surface-1:     rgba(180, 160, 230, 0.3);
-  --t-surface-2:     rgba(160, 140, 210, 0.4);
-  --t-surface-3:     rgba(140, 120, 200, 0.5);
-  --t-surface-glass: rgba(180, 165, 230, 0.25);
-  --t-surface-card:  rgba(170, 150, 220, 0.3);
-  --t-surface-card-solid: rgba(155, 135, 210, 0.45);
-
-  /* ── Text Colors ─────────────────────────────────────── */
+  /* ── Text Colors — Confident & Muted Metallic ─────────────── */
   --t-text-primary:   #FFFFFF;
-  --t-text-secondary: rgba(255, 255, 255, 0.8);
-  --t-text-muted:     rgba(255, 255, 255, 0.55);
-  --t-text-faint:     rgba(255, 255, 255, 0.35);
+  --t-text-secondary: #A0A6B5;
+  --t-text-muted:     #636A7A;
+  --t-text-faint:     #3B404D;
+  --t-text-orange:    #FF6611;
 
-  /* ── Border Colors ───────────────────────────────────── */
-  --t-border:         rgba(255, 255, 255, 0.15);
-  --t-border-hover:   rgba(255, 255, 255, 0.28);
-  --t-border-active:  rgba(255, 255, 255, 0.4);
-  --t-border-glass:   rgba(255, 255, 255, 0.1);
+  /* ── Technical Border & Marker Colors ─────────────────────── */
+  --t-border:         rgba(255, 255, 255, 0.08);
+  --t-border-hover:   rgba(255, 255, 255, 0.2);
+  --t-border-active:  rgba(255, 85, 0, 0.4);
+  --t-border-orange:  rgba(255, 85, 0, 0.35);
+  --t-border-glass:   rgba(255, 255, 255, 0.06);
 
-  /* ── Gradients ───────────────────────────────────────── */
-  --t-gradient-primary: linear-gradient(135deg, #5B4DC7, #7C6ADB, #9B8AEE);
-  --t-gradient-warm:    linear-gradient(135deg, #FF7A59, #FFB36B);
-  --t-gradient-violet:  linear-gradient(135deg, #7C6ADB, #A594ED);
-  --t-gradient-cool:    linear-gradient(135deg, #5B4DC7, #6BB8E0);
-  --t-gradient-emerald: linear-gradient(135deg, #10B981, #34D399);
-  --t-gradient-bg:      linear-gradient(135deg, #C8B8F0 0%, #B8A4E8 30%, #A78BDF 70%, #9578D3 100%);
-  --t-gradient-card:    linear-gradient(145deg, rgba(200, 185, 245, 0.35), rgba(160, 140, 215, 0.25));
+  /* ── Technical Gradients ─────────────────────────────────── */
+  --t-gradient-primary: linear-gradient(135deg, #FF5500, #FF7700);
+  --t-gradient-dark:    linear-gradient(180deg, #0F1117 0%, #07080B 100%);
+  --t-gradient-glow:    radial-gradient(circle at 50% 30%, rgba(255, 85, 0, 0.15) 0%, rgba(7, 8, 11, 0) 70%);
+  --t-gradient-card:    linear-gradient(145deg, rgba(20, 23, 32, 0.9), rgba(10, 11, 15, 0.95));
 
-  /* ── Typography ──────────────────────────────────────── */
-  --t-font-heading: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --t-font-body:    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-
-  /* ── Spacing ─────────────────────────────────────────── */
-  --t-space-2xs: 0.25rem;
-  --t-space-xs:  0.5rem;
-  --t-space-sm:  0.75rem;
-  --t-space-md:  1rem;
-  --t-space-lg:  1.5rem;
-  --t-space-xl:  2rem;
-  --t-space-2xl: 3rem;
-  --t-space-3xl: 4rem;
-  --t-space-4xl: 6rem;
-
-  /* ── Radius ──────────────────────────────────────────── */
-  --t-radius-sm:   8px;
-  --t-radius-md:   12px;
-  --t-radius-lg:   16px;
-  --t-radius-xl:   20px;
-  --t-radius-2xl:  24px;
-  --t-radius-3xl:  32px;
-  --t-radius-4xl:  40px;
+  /* ── Typography & Letter Spacing ──────────────────────────── */
+  --t-font-heading: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --t-font-body:    'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --t-font-mono:    'Space Mono', 'Fira Code', monospace;
+  
+  --t-radius-sm:   4px;
+  --t-radius-md:   8px;
+  --t-radius-lg:   12px;
+  --t-radius-xl:   16px;
   --t-radius-full: 9999px;
-
-  /* ── Shadows ─────────────────────────────────────────── */
-  --t-shadow-sm:    0 2px 8px rgba(100, 70, 180, 0.12);
-  --t-shadow-md:    0 8px 24px rgba(100, 70, 180, 0.15);
-  --t-shadow-lg:    0 16px 48px rgba(100, 70, 180, 0.18);
-  --t-shadow-xl:    0 24px 64px rgba(100, 70, 180, 0.22);
-  --t-shadow-glow-violet: 0 0 30px rgba(124, 106, 219, 0.25);
-  --t-shadow-glow-cyan:   0 0 30px rgba(107, 184, 224, 0.2);
-  --t-shadow-glow-blue:   0 0 30px rgba(91, 77, 199, 0.2);
-
-  /* ── Layout ──────────────────────────────────────────── */
-  --t-max-width:   1320px;
-  --t-nav-height:  76px;
-
-  /* ── Transitions ─────────────────────────────────────── */
-  --t-ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
-  --t-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
-  --t-duration-fast:   0.2s;
-  --t-duration-normal: 0.35s;
-  --t-duration-slow:   0.6s;
 }
-
-/* ── Glass Panel Utility ───────────────────────────────── */
-.glass-panel {
-  background: var(--t-surface-glass);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--t-border);
-  border-radius: var(--t-radius-2xl);
-  box-shadow: var(--t-shadow-md);
-  transition: border-color var(--t-duration-normal) ease,
-              box-shadow var(--t-duration-normal) ease;
-}
-
-.glass-panel:hover {
-  border-color: var(--t-border-hover);
-  box-shadow: var(--t-shadow-lg);
-}
-
-.glass-panel--solid {
-  background: var(--t-surface-card-solid);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-}
-
-/* ── Gradient Text Utility ─────────────────────────────── */
-.gradient-text {
-  background: var(--t-gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.gradient-text--warm {
-  background: var(--t-gradient-warm);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* ── Button Utilities ──────────────────────────────────── */
-.t-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--t-space-xs);
-  font-family: var(--t-font-body);
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  border-radius: var(--t-radius-md);
-  cursor: pointer;
-  transition: all var(--t-duration-normal) var(--t-ease-out);
-  position: relative;
-  overflow: hidden;
-  border: none;
-}
-
-.t-btn--primary {
-  padding: 0.85rem 2rem;
-  font-size: 0.85rem;
-  color: #FFFFFF;
-  background: var(--t-gradient-primary);
-  box-shadow: 0 4px 20px rgba(91, 77, 199, 0.35);
-}
-
-.t-btn--primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(91, 77, 199, 0.5);
-}
-
-.t-btn--glass {
-  padding: 0.85rem 2rem;
-  font-size: 0.85rem;
-  color: var(--t-text-primary);
-  background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.t-btn--glass:hover {
-  background: rgba(255, 255, 255, 0.2);
-  border-color: rgba(255, 255, 255, 0.35);
-  transform: translateY(-2px);
-}
-
-/* ── Animations ────────────────────────────────────────── */
-@keyframes t-float {
-  0%, 100% { transform: translateY(0px); }
-  50%      { transform: translateY(-12px); }
-}
-
-@keyframes t-float-slow {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50%      { transform: translateY(-8px) rotate(2deg); }
-}
-
-@keyframes t-glow-pulse {
-  0%, 100% { box-shadow: 0 0 15px rgba(91, 77, 199, 0.2); }
-  50%      { box-shadow: 0 0 30px rgba(124, 106, 219, 0.4); }
-}
-
-@keyframes t-gradient-shift {
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-@keyframes t-reveal-up {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes t-spin-slow {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
-}
-
-.anim-float      { animation: t-float 6s ease-in-out infinite; }
-.anim-float-slow { animation: t-float-slow 8s ease-in-out infinite; }
-.anim-glow       { animation: t-glow-pulse 3s ease-in-out infinite; }

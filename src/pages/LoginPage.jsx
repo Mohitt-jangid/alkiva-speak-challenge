@@ -138,7 +138,7 @@ export default function LoginPage() {
               {/* Submit */}
               <motion.button
                 type="submit"
-                className="login-btn"
+                className="login-submit-btn"
                 whileTap={{ scale: 0.98 }}
               >
                 Enter Challenge →
@@ -146,8 +146,8 @@ export default function LoginPage() {
             </form>
 
             {/* Footer */}
-            <div className="login-footer">
-              Authorized personnel only • <span>3 Challengers</span>
+            <div className="login-users-hint">
+              Authorized personnel only • <span>Secure Access Protocol</span>
             </div>
           </motion.div>
         </motion.div>

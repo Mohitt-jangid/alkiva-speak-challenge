@@ -1,0 +1,211 @@
+/* ============================================================
+   NAVBAR — Dark Cinematic Technology Header & Mobile Menu
+   ============================================================ */
+
+.talkiva-navbar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.1rem 2rem;
+  background: rgba(7, 8, 11, 0.92);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.talkiva-nav-brand {
+  font-family: var(--t-font-heading);
+  font-size: clamp(1rem, 4vw, 1.25rem);
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+}
+
+.talkiva-brand-icon {
+  color: #FF5500;
+  font-size: 1rem;
+}
+
+.talkiva-brand-ver {
+  font-family: var(--t-font-mono, monospace);
+  font-size: 0.65rem;
+  color: #636A7A;
+  letter-spacing: 0.05em;
+  padding-left: 0.4rem;
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.talkiva-desktop-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.talkiva-nav-link {
+  background: none;
+  border: none;
+  color: #A0A6B5;
+  font-family: var(--t-font-heading);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.talkiva-nav-link:hover {
+  color: #FFFFFF;
+}
+
+/* Actions Bar on Desktop */
+.talkiva-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.nav-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+  font-family: var(--t-font-heading);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: #FFFFFF;
+  cursor: pointer;
+  padding: 0.45rem 0.85rem;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  white-space: nowrap;
+}
+
+.nav-btn:hover {
+  border-color: rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.nav-btn--drop {
+  background: rgba(255, 85, 0, 0.12);
+  border-color: rgba(255, 85, 0, 0.35);
+  color: #FF6611;
+}
+
+.nav-btn--drop:hover {
+  background: #FF5500;
+  color: #FFFFFF;
+  border-color: #FF5500;
+}
+
+.nav-btn--module {
+  background: rgba(99, 102, 241, 0.15);
+  border-color: rgba(129, 140, 248, 0.4);
+  color: #A5B4FC;
+}
+
+.nav-btn--streak {
+  background: rgba(245, 158, 11, 0.12);
+  border-color: rgba(245, 158, 11, 0.4);
+  color: #FBBF24;
+  font-family: var(--t-font-mono, monospace);
+}
+
+.nav-btn-badge {
+  background: #FF5500;
+  color: #FFFFFF;
+  font-size: 0.6rem;
+  font-weight: 900;
+  padding: 0.1rem 0.35rem;
+  border-radius: 2px;
+}
+
+/* Mobile Toggle Hamburger Button (Hidden on Desktop) */
+.talkiva-mobile-toggle {
+  display: none;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #FFFFFF;
+  width: 36px;
+  height: 36px;
+  border-radius: 4px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+/* Mobile Drawer Overlay Menu */
+.talkiva-mobile-menu {
+  display: none;
+  position: fixed;
+  top: 60px;
+  left: 0;
+  right: 0;
+  background: #0B0C10;
+  border-bottom: 1px solid rgba(255, 85, 0, 0.3);
+  padding: 1.5rem;
+  flex-direction: column;
+  gap: 1rem;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9);
+  z-index: 999;
+}
+
+.talkiva-mobile-menu--open {
+  display: flex;
+}
+
+.mobile-menu-item {
+  width: 100%;
+  padding: 0.85rem 1.2rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  color: #FFFFFF;
+  font-family: var(--t-font-heading);
+  font-size: 0.88rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.mobile-menu-item:hover {
+  border-color: #FF5500;
+  color: #FF6611;
+}
+
+/* ── Mobile Breakpoints (< 768px) ────────────────────────── */
+@media (max-width: 768px) {
+  .talkiva-navbar {
+    padding: 0.8rem 1rem;
+  }
+  .talkiva-desktop-nav {
+    display: none;
+  }
+  .talkiva-nav-actions {
+    display: none;
+  }
+  .talkiva-mobile-toggle {
+    display: flex;
+  }
+  .talkiva-brand-ver {
+    display: none;
+  }
+}

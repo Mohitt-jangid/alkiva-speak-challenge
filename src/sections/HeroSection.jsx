@@ -2,31 +2,30 @@ import React, { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import MotivationalHero from '../components/MotivationalHero';
 import Challenge100Card from '../components/Challenge100/Challenge100Card';
-import Navbar from './Navbar';
+import InstagramChallengeCard from '../components/InstagramChallengeCard';
 import { useAuth } from '../context/AuthContext';
 import { getDailyTopic, formatDisplayDate } from '../utils/dailyTopic';
 import './HeroSection.css';
 
 /**
- * HeroSection — Single Page Glass Frame Landing
- * Clean frosted glass container.
- * Shows Today's Challenge from the 21 curated topics (1 per day).
+ * HeroSection — Dark Cinematic Technology Landing
+ * Visual reference composition: Large confident headline, 3D centerpiece with orbital rings, technical metadata.
  */
 
 const textVariants = {
-  hidden: { opacity: 0, y: 25 },
+  hidden: { opacity: 0, y: 30 },
   visible: (i) => ({
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.7,
-      delay: 0.2 + i * 0.1,
+      duration: 0.8,
+      delay: 0.15 + i * 0.1,
       ease: [0.16, 1, 0.3, 1],
     },
   }),
 };
 
-export default function HeroSection({ onOpenChallenge }) {
+export default function HeroSection({ onOpenChallenge, onOpenInstagram, onOpenChat, onOpenProfile, unreadCount }) {
   const { currentUser } = useAuth();
   const [revealed, setRevealed] = useState(false);
   const { topic, category, prompt, id } = getDailyTopic();
@@ -43,208 +42,174 @@ export default function HeroSection({ onOpenChallenge }) {
     setRevealed(false);
   }, []);
 
-  return (
-    <section id="hero" className="hero-section">
-      {/* Outer Main Glass Frame Container */}
-      <div className="hero-frame">
-        {/* Navbar inside top of frame */}
-        <Navbar onOpenChallenge={onOpenChallenge} />
+  const scrollToSection = (sectionId) => {
+    const el = document.getElementById(sectionId);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  };
 
+  return (
+    <section id="hero" className="hero-tech-section">
+      {/* Outer Technical Container */}
+      <div className="hero-tech-container">
+        
         <AnimatePresence mode="wait">
           {revealed ? (
-            /* ── Revealed Topic View ───────────────────── */
+            /* ── Revealed Daily Topic View ───────────────────── */
             <motion.div
               key="revealed-view"
-              className="hero-revealed"
-              initial={{ opacity: 0, y: 30, scale: 0.96 }}
+              className="hero-revealed-panel"
+              initial={{ opacity: 0, y: 30, scale: 0.98 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -20, scale: 0.96 }}
+              exit={{ opacity: 0, y: -20, scale: 0.98 }}
               transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
             >
-              <motion.span
-                className="hero-revealed__date"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.1 }}
-              >
-                {category?.toUpperCase()} • TOPIC #{id} — {displayDate}
-              </motion.span>
+              <div className="hero-revealed__meta">
+                <span className="tech-eyebrow">{category?.toUpperCase()}</span>
+                <span className="tech-index-tag">// TOPIC #{id} — {displayDate}</span>
+              </div>
 
-              <motion.h2
-                className="hero-revealed__topic"
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.15 }}
-              >
-                {topic}
-              </motion.h2>
+              <h2 className="hero-revealed__topic">{topic}</h2>
 
-              <motion.div
-                className="hero-revealed__line"
-                initial={{ width: 0 }}
-                animate={{ width: 80 }}
-                transition={{ delay: 0.25 }}
-              />
+              <div className="hero-revealed__prompt-box">
+                <div className="prompt-box-header">💡 SPEAKING PROMPT PROTOCOL</div>
+                <p className="prompt-box-body">{prompt}</p>
+              </div>
 
-              <motion.p
-                className="hero-revealed__quote"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.3 }}
-                style={{ fontStyle: 'normal', fontSize: '0.95rem', lineHeight: 1.6, color: 'rgba(255,255,255,0.92)' }}
-              >
-                💡 <strong>Speaking Prompt:</strong> {prompt}
-              </motion.p>
-
-              <motion.span
-                className="hero-revealed__meta"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.35 }}
-              >
-                Suggested practice duration: 3–5 minutes
-              </motion.span>
-
-              <motion.div
-                className="hero-revealed__actions"
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 }}
-              >
+              <div className="hero-revealed__actions">
                 <button
-                  className="hero-pill-btn hero-pill-btn--solid"
+                  className="tech-btn-primary"
+                  onClick={() => onOpenInstagram && onOpenInstagram()}
+                >
+                  Start Practice Mission →
+                </button>
+                <button
+                  className="tech-btn-outline"
                   onClick={handleReset}
                 >
-                  ← BACK TO OVERVIEW
+                  ← Back to Overview
                 </button>
-              </motion.div>
+              </div>
             </motion.div>
           ) : (
-            /* ── Single Page Hero View ─────────── */
+            /* ── Main Single-Page Hero View (Asymmetric Technical Layout) ── */
             <motion.div
               key="hero-view"
-              className="hero-grid"
+              className="hero-tech-grid"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.6 }}
             >
-              {/* Background Watermark Text "TALKIVA" */}
-              <div className="hero-watermark">TALKIVA</div>
+              {/* Corner Technical Bracket Markers */}
+              <div className="tech-corner tech-corner--tl">+</div>
+              <div className="tech-corner tech-corner--tr">+</div>
+              <div className="tech-corner tech-corner--bl">+</div>
+              <div className="tech-corner tech-corner--br">+</div>
 
-              {/* Left Column: Eyebrow + Headline + Carousel Dots + Social Links */}
-              <div className="hero-left">
+              {/* Left Column: Eyebrow + Huge Headline + Copy + CTAs */}
+              <div className="hero-left-column">
                 <motion.div
-                  className="hero-eyebrow-container"
+                  className="tech-eyebrow-wrap"
                   custom={0}
                   initial="hidden"
                   animate="visible"
                   variants={textVariants}
                 >
-                  <span className="hero-eyebrow-text">Daily challenge <strong>{displayDate}</strong></span>
-                  <div className="hero-eyebrow-line" />
+                  <span className="tech-eyebrow">COMMUNICATION • FLUENCY • CONFIDENCE</span>
+                  <span className="tech-date-tag">[{displayDate}]</span>
                 </motion.div>
 
                 <motion.h1
-                  className="hero-title"
+                  className="hero-main-headline"
                   custom={1}
                   initial="hidden"
                   animate="visible"
                   variants={textVariants}
                 >
-                  Beginners
+                  Speak with clarity.
                   <br />
-                  Guide to
-                  <br />
-                  <span className="hero-title__highlight">English fluency</span>
+                  <span className="hero-headline-accent">Think without hesitation.</span>
                 </motion.h1>
 
-                <motion.div
-                  className="hero-motivational-wrap"
-                  custom={1.5}
-                  initial="hidden"
-                  animate="visible"
-                  variants={textVariants}
-                >
-                  <MotivationalHero />
-                </motion.div>
-
-                {/* Dots indicator */}
-                <motion.div
-                  className="hero-dots-row"
-                  custom={2}
-                  initial="hidden"
-                  animate="visible"
-                  variants={textVariants}
-                >
-                  <span className="hero-dot hero-dot--active" />
-                  <span className="hero-dot" />
-                  <span className="hero-dot" />
-                  <span className="hero-dot" />
-                  <span className="hero-dot" />
-                </motion.div>
-
-                {/* Bottom Left Social Links */}
-                <motion.div
-                  className="hero-social-links"
-                  custom={3}
-                  initial="hidden"
-                  animate="visible"
-                  variants={textVariants}
-                >
-                  <span>FB</span>
-                  <span>TW</span>
-                  <span>IG</span>
-                  <span>IN</span>
-                </motion.div>
-              </div>
-
-              {/* Right Column: Avatars + Description + CTA Pill Button + Private Card if mohit */}
-              <div className="hero-right">
-                <motion.div
-                  className="hero-avatars"
-                  custom={1}
-                  initial="hidden"
-                  animate="visible"
-                  variants={textVariants}
-                >
-                  <div className="hero-avatar hero-avatar--1">👤</div>
-                  <div className="hero-avatar hero-avatar--2">👩‍💼</div>
-                  <div className="hero-avatar hero-avatar--3">👨‍🎓</div>
-                </motion.div>
-
                 <motion.p
-                  className="hero-description"
+                  className="hero-main-subtext"
                   custom={2}
                   initial="hidden"
                   animate="visible"
                   variants={textVariants}
                 >
-                  <strong>Talkiva</strong> is a modern communication platform designed to help you improve English speaking, confidence, pronunciation, and fluency daily.
+                  Talkiva is an advanced communication & English mastery engine designed to build daily articulation, active vocabulary, and analytical speaking confidence.
                 </motion.p>
 
                 <motion.div
-                  className="hero-cta-wrap"
+                  className="hero-actions-row"
                   custom={3}
                   initial="hidden"
                   animate="visible"
                   variants={textVariants}
                 >
-                  <button className="hero-pill-btn hero-pill-btn--outline" onClick={handleDiscover}>
-                    Get started
+                  <button className="tech-btn-primary" onClick={handleDiscover}>
+                    Start Practicing <span className="btn-arrow">→</span>
+                  </button>
+                  <button className="tech-btn-outline" onClick={() => onOpenInstagram && onOpenInstagram()}>
+                    Explore Talkiva
                   </button>
                 </motion.div>
 
-                {/* PRIVATE FEATURE CARD — MOHIT ONLY */}
-                {isMohit && (
-                  <Challenge100Card onOpenChallenge={onOpenChallenge} />
-                )}
+                {/* Technical Telemetry Badges */}
+                <motion.div
+                  className="hero-telemetry-row"
+                  custom={4}
+                  initial="hidden"
+                  animate="visible"
+                  variants={textVariants}
+                >
+                  <div className="telemetry-item">
+                    <span className="telemetry-label">SYSTEM</span>
+                    <span className="telemetry-value">ONLINE // ACTIVE</span>
+                  </div>
+                  <div className="telemetry-divider">/</div>
+                  <div className="telemetry-item">
+                    <span className="telemetry-label">PROTOCOL</span>
+                    <span className="telemetry-value">DAILY DISCOVERY</span>
+                  </div>
+                  <div className="telemetry-divider">/</div>
+                  <div className="telemetry-item">
+                    <span className="telemetry-label">MODULATION</span>
+                    <span className="telemetry-value">AUDIO ENGAGED</span>
+                  </div>
+                </motion.div>
+              </div>
 
-                {/* Subtle caption text at bottom right */}
-                <div className="hero-right-caption" style={{ marginTop: '1.2rem' }}>
-                  Daily speaking missions • Interactive audio practice
+              {/* Right Column: 3D Centerpiece Artwork & Feature Cards */}
+              <div className="hero-right-column">
+                <div className="hero-3d-wrapper">
+                  {/* Atmospheric Glow behind 3D render */}
+                  <div className="hero-3d-glow" />
+                  
+                  {/* High Quality 3D Render Image */}
+                  <img
+                    src="/images/hero_3d.jpg"
+                    alt="Talkiva 3D Communication Core"
+                    className="hero-3d-image"
+                  />
+
+                  {/* Overlay Technical Graphics */}
+                  <div className="hero-3d-hud">
+                    <div className="hud-line" />
+                    <span className="hud-badge">3D SOUND CORE v2.4</span>
+                  </div>
+                </div>
+
+                {/* Integrated Feature Cards */}
+                <div className="hero-cards-wrapper">
+                  <InstagramChallengeCard onOpenInstagram={onOpenInstagram} />
+                  {isMohit && (
+                    <Challenge100Card onOpenChallenge={onOpenChallenge} />
+                  )}
                 </div>
               </div>
+
             </motion.div>
           )}
         </AnimatePresence>

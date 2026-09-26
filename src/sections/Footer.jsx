@@ -1,75 +1,62 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 
 /**
- * Footer — Minimal, editorial-style footer.
+ * Footer — Minimal, technical product footer (DRN OS aesthetic)
  */
 export default function Footer() {
   return (
     <footer
       style={{
-        padding: 'var(--space-3xl) var(--space-xl)',
-        borderTop: '1px solid var(--color-border)',
-        textAlign: 'center',
+        padding: '3rem 2rem 4rem 2rem',
+        background: '#040507',
+        borderTop: '1px solid rgba(255, 255, 255, 0.08)',
+        color: '#636A7A',
+        fontFamily: 'var(--t-font-body)',
+        fontSize: '0.82rem',
       }}
     >
       <div
         style={{
-          maxWidth: 'var(--max-width)',
+          maxWidth: '1300px',
           margin: '0 auto',
           display: 'flex',
           flexDirection: 'column',
-          alignItems: 'center',
-          gap: 'var(--space-md)',
+          gap: '2rem',
         }}
       >
-        {/* Logo */}
-        <p
-          style={{
-            fontFamily: 'var(--font-sans)',
-            fontSize: '0.7rem',
-            fontWeight: 600,
-            letterSpacing: '0.2em',
-            textTransform: 'uppercase',
-            color: 'var(--color-text-primary)',
-          }}
-        >
-          TALKIVA
-        </p>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1.5rem' }}>
+          
+          {/* Logo */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', color: '#FFFFFF', fontWeight: 800, fontFamily: 'var(--t-font-heading)', letterSpacing: '0.12em' }}>
+            <span style={{ color: '#FF5500' }}>❖</span>
+            <span>TALKIVA</span>
+            <span style={{ fontFamily: 'monospace', fontSize: '0.68rem', color: '#636A7A', paddingLeft: '0.5rem', borderLeft: '1px solid rgba(255,255,255,0.1)' }}>
+              COMMUNICATION TECHNOLOGY
+            </span>
+          </div>
 
-        {/* Tagline */}
-        <p
-          style={{
-            fontFamily: 'var(--font-serif)',
-            fontSize: '1rem',
-            fontStyle: 'italic',
-            color: 'var(--color-text-muted)',
-          }}
-        >
-          One topic. Every day. No excuses.
-        </p>
+          {/* System Telemetry Badges */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1.2rem', fontFamily: 'monospace', fontSize: '0.72rem' }}>
+            <span>SYS_STATUS: <strong style={{ color: '#10B981' }}>OPERATIONAL</strong></span>
+            <span>/</span>
+            <span>SECURITY: <strong style={{ color: '#FFFFFF' }}>ENCRYPTED</strong></span>
+            <span>/</span>
+            <span>BUILD: <strong style={{ color: '#FF5500' }}>v2.4.0</strong></span>
+          </div>
 
-        {/* Divider */}
-        <div
-          style={{
-            width: '40px',
-            height: '1px',
-            background: 'var(--color-accent)',
-            margin: 'var(--space-sm) 0',
-          }}
-        />
+        </div>
 
-        {/* Copyright */}
-        <p
-          style={{
-            fontFamily: 'var(--font-sans)',
-            fontSize: '0.65rem',
-            letterSpacing: '0.1em',
-            color: 'var(--color-text-muted)',
-          }}
-        >
-          © {new Date().getFullYear()} TALKIVA
-        </p>
+        <div style={{ width: '100%', height: '1px', background: 'rgba(255, 255, 255, 0.06)' }} />
+
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem', color: '#525866' }}>
+          <div>
+            "Speak with clarity. Think without hesitation." — Talkiva Communication & Analytics
+          </div>
+          <div style={{ fontFamily: 'monospace', fontSize: '0.72rem' }}>
+            © {new Date().getFullYear()} TALKIVA. ALL RIGHTS RESERVED.
+          </div>
+        </div>
+
       </div>
     </footer>
   );

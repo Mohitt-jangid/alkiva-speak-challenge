@@ -1,6 +1,6 @@
 /* ============================================================
    TALKIVA — Global Styles
-   Soft Lavender/Purple Theme
+   Dark Cinematic Technology visual system (DRN OS Aesthetic)
    ============================================================ */
 
 @import './design-tokens.css';
@@ -14,44 +14,33 @@
 }
 
 :root {
-  /* Legacy compat aliases */
   --color-bg: var(--t-bg-primary);
-  --color-surface: var(--t-bg-dark);
-  --color-surface-hover: var(--t-bg-deeper);
+  --color-surface: var(--t-surface-card);
+  --color-surface-hover: var(--t-surface-2);
   --color-text-primary: var(--t-text-primary);
   --color-text-secondary: var(--t-text-secondary);
   --color-text-muted: var(--t-text-muted);
   --color-border: var(--t-border);
-  --color-accent: var(--t-electric);
-  --color-accent-dark: var(--t-violet);
-  --color-prism-cyan: var(--t-cyan);
-  --color-prism-magenta: var(--t-rose);
-  --color-prism-violet: var(--t-violet);
-  --color-prism-gold: var(--t-amber);
+  --color-accent: var(--t-orange-primary);
 
   --font-serif: var(--t-font-heading);
   --font-sans: var(--t-font-body);
-
-  --space-xs: var(--t-space-xs);
-  --space-sm: var(--t-space-md);
-  --space-md: var(--t-space-lg);
-  --space-lg: var(--t-space-xl);
-  --space-xl: var(--t-space-2xl);
-  --space-2xl: var(--t-space-3xl);
-  --space-3xl: var(--t-space-4xl);
-
-  --max-width: var(--t-max-width);
-  --nav-height: var(--t-nav-height);
 }
 
 html, body {
   width: 100%;
-  height: 100%;
-  background: var(--t-gradient-bg) !important;
+  min-height: 100vh;
+  background-color: #07080B !important;
+  background-image: 
+    radial-gradient(circle at 50% 20%, rgba(255, 85, 0, 0.08) 0%, transparent 60%),
+    radial-gradient(circle at 80% 80%, rgba(255, 120, 0, 0.05) 0%, transparent 50%),
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px) !important;
+  background-size: 100% 100%, 100% 100%, 60px 60px, 60px 60px !important;
   background-attachment: fixed !important;
   color: var(--t-text-primary);
   font-family: var(--t-font-body);
-  line-height: 1.65;
+  line-height: 1.6;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -65,8 +54,8 @@ html, body {
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--t-font-heading);
   font-weight: 800;
-  line-height: 1.15;
-  letter-spacing: -0.025em;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
   color: var(--t-text-primary);
 }
 
@@ -79,112 +68,124 @@ p {
 a {
   color: #FFFFFF;
   text-decoration: none;
-  transition: opacity var(--t-duration-fast) ease;
+  transition: all 0.2s ease;
 }
 
 a:hover {
-  opacity: 0.8;
+  color: var(--t-orange-primary);
 }
 
-/* ── Legacy Glass Cards ────────────────────────────── */
-.pure-black-card {
-  background: var(--t-surface-card);
-  border: 1px solid var(--t-border);
-  border-radius: var(--t-radius-xl);
-  box-shadow: var(--t-shadow-lg);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  transition: border-color var(--t-duration-normal) ease,
-              box-shadow var(--t-duration-normal) ease;
+/* Technical Label Eyebrow */
+.tech-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--t-font-heading);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  color: var(--t-orange-primary);
+  text-transform: uppercase;
 }
 
-.pure-black-card:hover {
-  border-color: var(--t-border-hover);
-  box-shadow: var(--t-shadow-xl), var(--t-shadow-glow-violet);
+.tech-eyebrow::before {
+  content: '▪';
+  color: var(--t-orange-primary);
+  font-size: 0.8rem;
 }
 
-/* ── Legacy Buttons ─────────────────────────────────── */
-.btn-primary {
+/* Technical Section Index Tag */
+.tech-index-tag {
+  font-family: var(--t-font-mono, monospace);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--t-text-muted);
+  text-transform: uppercase;
+}
+
+/* Technical Corner Brackets Frame */
+.tech-frame {
+  position: relative;
+  background: rgba(12, 14, 20, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(16px);
+  transition: all 0.3s ease;
+}
+
+.tech-frame:hover {
+  border-color: rgba(255, 85, 0, 0.35);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 85, 0, 0.15);
+}
+
+/* Technical Primary Action Button with Orange Accents */
+.tech-btn-primary {
+  position: relative;
+  background: linear-gradient(135deg, #FF5500 0%, #FF3E00 100%);
+  color: #FFFFFF;
+  font-family: var(--t-font-heading);
+  font-size: 0.88rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.85rem 2rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 20px rgba(255, 85, 0, 0.35);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--t-space-xs);
-  padding: 0.9rem 2rem;
-  font-family: var(--t-font-body);
-  font-size: 0.82rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: #FFFFFF;
-  background: var(--t-gradient-primary);
-  background-size: 200% 200%;
-  border: none;
-  border-radius: var(--t-radius-md);
-  cursor: pointer;
-  transition: all var(--t-duration-normal) var(--t-ease-out);
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 4px 20px rgba(91, 77, 199, 0.35);
+  gap: 0.6rem;
 }
 
-.btn-primary:hover {
+.tech-btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(91, 77, 199, 0.5);
+  box-shadow: 0 8px 30px rgba(255, 85, 0, 0.6);
+  background: linear-gradient(135deg, #FF6611 0%, #FF4F11 100%);
 }
 
-.btn-primary:active {
-  transform: translateY(0);
-}
-
-/* ── Animations ─────────────────────────────────────── */
-@keyframes neonGlow {
-  0%, 100% { box-shadow: 0 0 15px rgba(91, 77, 199, 0.3); }
-  50% { box-shadow: 0 0 30px rgba(124, 106, 219, 0.5); }
-}
-
-@keyframes pulseRecording {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.75; transform: scale(1.05); }
-}
-
-@keyframes floatParticle {
-  0% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-15px) rotate(180deg); }
-  100% { transform: translateY(0px) rotate(360deg); }
-}
-
-.audio-bar {
-  width: 4px;
-  background: var(--t-electric);
-  border-radius: 2px;
-  animation: equalize 1s infinite ease-in-out alternate;
-}
-
-@keyframes equalize {
-  0% { height: 6px; }
-  100% { height: 24px; }
-}
-
-/* ── Scrollbar ──────────────────────────────────────── */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--t-bg-dark);
-}
-
-::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.25);
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.45);
-}
-
-/* ── Selection ──────────────────────────────────────── */
-::selection {
-  background: rgba(91, 77, 199, 0.35);
+.tech-btn-outline {
+  position: relative;
+  background: rgba(255, 255, 255, 0.03);
   color: #FFFFFF;
+  font-family: var(--t-font-heading);
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.85rem 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+}
+
+.tech-btn-outline:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--t-orange-primary);
+  color: #FFFFFF;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #07080B;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--t-orange-primary);
 }
