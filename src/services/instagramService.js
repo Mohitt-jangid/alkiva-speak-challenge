@@ -49,10 +49,10 @@ const INITIAL_FALLBACK_DB = {
   users: {
     Mohit: {
       userId: 'Mohit',
-      streak: 21,
-      lastSubmissionDate: '2026-09-27',
+      streak: 20,
+      lastSubmissionDate: '2026-09-26',
       submissions: [
-        { id: 'ig_1790480363809_4yj1u', userId: 'Mohit', link: 'https://www.instagram.com/reel/Ddwj7EfOz7h0riTq79s48FdvXLzn8OVDf89X_00/?stkn=MWd2OGN0bDlrNDA5YQ==', normalizedLink: 'instagram.com/reel/ddwj7efoz7h0ritq79s48fdvxlzn8ovdf89x_00', date: '2026-09-27', timestamp: '2026-09-27T03:39:23.809Z' },
+        { id: 'ig_1790480363809_4yj1u', userId: 'Mohit', link: 'https://www.instagram.com/reel/Ddwj7EfOz7h0riTq79s48FdvXLzn8OVDf89X_00/?stkn=MWd2OGN0bDlrNDA5YQ==', normalizedLink: 'instagram.com/reel/ddwj7efoz7h0ritq79s48fdvxlzn8ovdf89x_00', date: '2026-09-26', timestamp: '2026-09-26T20:00:00.000Z' },
         { id: 'ig_d20', userId: 'Mohit', link: 'https://www.instagram.com/reel/Ddt-R0rOZSOYzx1_OtTz4Z_3EMbFwr5V-zsvhc0/?stkn=MTJyMTFnOHgwaHdpag==', normalizedLink: 'instagram.com/reel/ddt-r0rozsoyzx1_ottz4z_3embfwr5v-zsvhc0', date: '2026-09-25', timestamp: '2026-09-25T09:00:00.000Z' },
         { id: 'ig_d19', userId: 'Mohit', link: 'https://www.instagram.com/reel/DdrXgG6Oq0-705yikoJF8nurY__lk1g-ustI480/?stkn=ODF5dW43cGthemZ2', normalizedLink: 'instagram.com/reel/ddrxgg6oq0-705yikojf8nury__lk1g-usti480', date: '2026-09-24', timestamp: '2026-09-24T09:00:00.000Z' },
         { id: 'ig_d18', userId: 'Mohit', link: 'https://www.instagram.com/reel/DdovMztuEYoJ1qlo4-FgDTAUfY2uz_rbZBq7AM0/?stkn=MWFpZTJ6dmtqeXc2aw==', normalizedLink: 'instagram.com/reel/ddovmztueyoj1qlo4-fgdtaufy2uz_rbzbq7am0', date: '2026-09-23', timestamp: '2026-09-23T09:00:00.000Z' },
@@ -77,20 +77,20 @@ const INITIAL_FALLBACK_DB = {
     },
     Aashish: {
       userId: 'Aashish',
-      streak: 0,
-      lastSubmissionDate: '2026-09-25',
+      streak: 3,
+      lastSubmissionDate: '2026-09-26',
       submissions: [
-        { id: 'ig_a03', userId: 'Aashish', link: 'https://www.instagram.com/reel/Ddt9nH6T08Pssqs__Tf14iYy-iwaCnUNp3xd_E0/?stkn=bjI1OGRhcmQwdnky', normalizedLink: 'instagram.com/reel/ddt9nh6t08pssqs__tf14iyy-iwacnunp3xd_e0', date: '2026-09-25', timestamp: '2026-09-25T09:00:00.000Z' },
+        { id: 'ig_a03', userId: 'Aashish', link: 'https://www.instagram.com/reel/Ddt9nH6T08Pssqs__Tf14iYy-iwaCnUNp3xd_E0/?stkn=bjI1OGRhcmQwdnky', normalizedLink: 'instagram.com/reel/ddt9nh6t08pssqs__tf14iyy-iwacnunp3xd_e0', date: '2026-09-26', timestamp: '2026-09-26T09:00:00.000Z' },
         { id: 'ig_a02', userId: 'Aashish', link: 'https://www.instagram.com/reel/DdrKx18T-eLV9RqphCtjYczFH99pFmbJbGAD1s0/?stkn=MTN5b3pqcmZsOTN3cw==', normalizedLink: 'instagram.com/reel/ddrkx18t-elv9rqphctjyczfh99pfmbjbgad1s0', date: '2026-09-24', timestamp: '2026-09-24T09:00:00.000Z' },
         { id: 'ig_a01', userId: 'Aashish', link: 'https://www.instagram.com/reel/DdrIM5wTBfoxY3WiA6NIIWskMLrGdRZGEjNQN40/?stkn=MTVseTJ5MDQ4OHg4OA==', normalizedLink: 'instagram.com/reel/ddrim5wtbfoxy3wia6niiwskmlrgdrzgejnqn40', date: '2026-09-23', timestamp: '2026-09-23T09:00:00.000Z' }
       ]
     },
     Ajay: {
       userId: 'Ajay',
-      streak: 0,
-      lastSubmissionDate: '2026-09-25',
+      streak: 6,
+      lastSubmissionDate: '2026-09-26',
       submissions: [
-        { id: 'ig_aj06', userId: 'Ajay', link: 'https://www.instagram.com/reel/Ddt4bozzqiVUVPGxyxIvI7RziFSSgsOSTOrXCA0/?stkn=MTRtbm50N3g1OGZ2cA==', normalizedLink: 'instagram.com/reel/ddt4bozzqivuvpgxyxivi7rzifssgsostorxca0', date: '2026-09-25', timestamp: '2026-09-25T09:00:00.000Z' },
+        { id: 'ig_aj06', userId: 'Ajay', link: 'https://www.instagram.com/reel/Ddt4bozzqiVUVPGxyxIvI7RziFSSgsOSTOrXCA0/?stkn=MTRtbm50N3g1OGZ2cA==', normalizedLink: 'instagram.com/reel/ddt4bozzqivuvpgxyxivi7rzifssgsostorxca0', date: '2026-09-26', timestamp: '2026-09-26T09:00:00.000Z' },
         { id: 'ig_aj05', userId: 'Ajay', link: 'https://www.instagram.com/reel/DdrO9UJT5JErkXZujGIfME-Ioxa6jIHw6H1Vks0/?stkn=MXYybW16MTdkaXl2cw==', normalizedLink: 'instagram.com/reel/ddro9ujt5jerkxzujgifme-ioxa6jihw6h1vks0', date: '2026-09-24', timestamp: '2026-09-24T09:00:00.000Z' },
         { id: 'ig_aj04', userId: 'Ajay', link: 'https://www.instagram.com/reel/DdhF4BOzPXSAv5h1omi1Ax97fZuauRLTgi9YHY0/?stkn=ZGExZ2JjYmF0Y3Zx', normalizedLink: 'instagram.com/reel/ddhf4bozpxsav5h1omi1ax97fzuaurltgi9yhy0', date: '2026-09-23', timestamp: '2026-09-23T09:00:00.000Z' },
         { id: 'ig_aj03', userId: 'Ajay', link: 'https://www.instagram.com/reel/DdhFx_xNuRYtglgL-s7YQ91GudpubhPkP6BWUE0/?stkn=ZmF5c3Z5YWxjMWQ1', normalizedLink: 'instagram.com/reel/ddhfx_xnurytglgl-s7yq91gudpubhpkp6bwue0', date: '2026-09-22', timestamp: '2026-09-22T09:00:00.000Z' },
@@ -106,10 +106,29 @@ function getLocalDb() {
     const raw = localStorage.getItem('talkiva_ig_db');
     if (raw) {
       const db = JSON.parse(raw);
-      if (db && db.users && db.users.Mohit) {
-        if (db.users.Mohit.streak < 21) {
-          db.users.Mohit.streak = 21;
-          db.users.Mohit.lastSubmissionDate = getTodayString();
+      if (db && db.users) {
+        let modified = false;
+        if (db.users.Mohit && db.users.Mohit.lastSubmissionDate === getTodayString()) {
+          db.users.Mohit.lastSubmissionDate = '2026-09-26';
+          db.users.Mohit.streak = 20;
+          if (db.users.Mohit.submissions && db.users.Mohit.submissions.length > 0) {
+            if (db.users.Mohit.submissions[0].date === getTodayString()) {
+              db.users.Mohit.submissions[0].date = '2026-09-26';
+            }
+          }
+          modified = true;
+        }
+        if (db.users.Ajay && db.users.Ajay.lastSubmissionDate === getTodayString()) {
+          db.users.Ajay.lastSubmissionDate = '2026-09-26';
+          db.users.Ajay.streak = 6;
+          if (db.users.Ajay.submissions && db.users.Ajay.submissions.length > 0) {
+            if (db.users.Ajay.submissions[0].date === getTodayString()) {
+              db.users.Ajay.submissions[0].date = '2026-09-26';
+            }
+          }
+          modified = true;
+        }
+        if (modified) {
           saveLocalDb(db);
         }
       }
@@ -118,7 +137,6 @@ function getLocalDb() {
   } catch (e) {
     console.error('Error reading local IG db:', e);
   }
-  // Initialize with initial fallback seed
   localStorage.setItem('talkiva_ig_db', JSON.stringify(INITIAL_FALLBACK_DB));
   return JSON.parse(JSON.stringify(INITIAL_FALLBACK_DB));
 }

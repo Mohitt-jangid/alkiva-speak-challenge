@@ -2,16 +2,16 @@
   "users": {
     "Mohit": {
       "userId": "Mohit",
-      "streak": 21,
-      "lastSubmissionDate": "2026-09-27",
+      "streak": 20,
+      "lastSubmissionDate": "2026-09-26",
       "submissions": [
         {
           "id": "ig_1790480363809_4yj1u",
           "userId": "Mohit",
           "link": "https://www.instagram.com/reel/Ddwj7EfOz7h0riTq79s48FdvXLzn8OVDf89X_00/?stkn=MWd2OGN0bDlrNDA5YQ==",
           "normalizedLink": "instagram.com/reel/ddwj7efoz7h0ritq79s48fdvxlzn8ovdf89x_00",
-          "date": "2026-09-27",
-          "timestamp": "2026-09-27T03:39:23.809Z"
+          "date": "2026-09-26",
+          "timestamp": "2026-09-26T20:00:00.000Z"
         },
         {
           "id": "ig_1790389352672_d20",
@@ -208,16 +208,16 @@
     },
     "Ajay": {
       "userId": "Ajay",
-      "streak": 0,
-      "lastSubmissionDate": "2026-09-25",
+      "streak": 6,
+      "lastSubmissionDate": "2026-09-26",
       "submissions": [
         {
           "id": "ig_1790389352674_aj06",
           "userId": "Ajay",
           "link": "https://www.instagram.com/reel/Ddt4bozzqiVUVPGxyxIvI7RziFSSgsOSTOrXCA0/?stkn=MTRtbm50N3g1OGZ2cA==",
           "normalizedLink": "instagram.com/reel/ddt4bozzqivuvpgxyxivi7rzifssgsostorxca0",
-          "date": "2026-09-25",
-          "timestamp": "2026-09-25T09:00:00.000Z"
+          "date": "2026-09-26",
+          "timestamp": "2026-09-26T09:00:00.000Z"
         },
         {
           "id": "ig_1790389352674_aj05",
