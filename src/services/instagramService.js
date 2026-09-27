@@ -77,10 +77,11 @@ const INITIAL_FALLBACK_DB = {
     },
     Aashish: {
       userId: 'Aashish',
-      streak: 3,
+      streak: 4,
       lastSubmissionDate: '2026-09-26',
       submissions: [
-        { id: 'ig_a03', userId: 'Aashish', link: 'https://www.instagram.com/reel/Ddt9nH6T08Pssqs__Tf14iYy-iwaCnUNp3xd_E0/?stkn=bjI1OGRhcmQwdnky', normalizedLink: 'instagram.com/reel/ddt9nh6t08pssqs__tf14iyy-iwacnunp3xd_e0', date: '2026-09-26', timestamp: '2026-09-26T09:00:00.000Z' },
+        { id: 'ig_a04_20260926', userId: 'Aashish', link: 'https://www.instagram.com/reel/DdwfQwZTrKdGal1vVuBeaUZlswW97cEDzWe3ZU0/?stkn=Mnl4NzM2enQ1Z2pr', normalizedLink: 'instagram.com/reel/ddwfqwztrkdgal1vvubeauzlsww97cedzwe3zu0', date: '2026-09-26', timestamp: '2026-09-26T21:00:00.000Z' },
+        { id: 'ig_a03', userId: 'Aashish', link: 'https://www.instagram.com/reel/Ddt9nH6T08Pssqs__Tf14iYy-iwaCnUNp3xd_E0/?stkn=bjI1OGRhcmQwdnky', normalizedLink: 'instagram.com/reel/ddt9nh6t08pssqs__tf14iyy-iwacnunp3xd_e0', date: '2026-09-25', timestamp: '2026-09-25T09:00:00.000Z' },
         { id: 'ig_a02', userId: 'Aashish', link: 'https://www.instagram.com/reel/DdrKx18T-eLV9RqphCtjYczFH99pFmbJbGAD1s0/?stkn=MTN5b3pqcmZsOTN3cw==', normalizedLink: 'instagram.com/reel/ddrkx18t-elv9rqphctjyczfh99pfmbjbgad1s0', date: '2026-09-24', timestamp: '2026-09-24T09:00:00.000Z' },
         { id: 'ig_a01', userId: 'Aashish', link: 'https://www.instagram.com/reel/DdrIM5wTBfoxY3WiA6NIIWskMLrGdRZGEjNQN40/?stkn=MTVseTJ5MDQ4OHg4OA==', normalizedLink: 'instagram.com/reel/ddrim5wtbfoxy3wia6niiwskmlrgdrzgejnqn40', date: '2026-09-23', timestamp: '2026-09-23T09:00:00.000Z' }
       ]
@@ -125,6 +126,20 @@ function getLocalDb() {
             if (db.users.Ajay.submissions[0].date === getTodayString()) {
               db.users.Ajay.submissions[0].date = '2026-09-26';
             }
+          }
+          modified = true;
+        }
+        if (db.users.Aashish) {
+          db.users.Aashish.lastSubmissionDate = '2026-09-26';
+          db.users.Aashish.streak = 4;
+          const hasDay4 = (db.users.Aashish.submissions || []).some(
+            (s) => s.id === 'ig_a04_20260926' || s.link.includes('DdwfQwZTrKdGal1vVuBeaUZlswW97cEDzWe3ZU0')
+          );
+          if (!hasDay4) {
+            db.users.Aashish.submissions = [
+              { id: 'ig_a04_20260926', userId: 'Aashish', link: 'https://www.instagram.com/reel/DdwfQwZTrKdGal1vVuBeaUZlswW97cEDzWe3ZU0/?stkn=Mnl4NzM2enQ1Z2pr', normalizedLink: 'instagram.com/reel/ddwfqwztrkdgal1vvubeauzlsww97cedzwe3zu0', date: '2026-09-26', timestamp: '2026-09-26T21:00:00.000Z' },
+              ...(db.users.Aashish.submissions || [])
+            ];
           }
           modified = true;
         }

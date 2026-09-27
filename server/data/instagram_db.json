@@ -177,9 +177,17 @@
     },
     "Aashish": {
       "userId": "Aashish",
-      "streak": 0,
-      "lastSubmissionDate": "2026-09-25",
+      "streak": 4,
+      "lastSubmissionDate": "2026-09-26",
       "submissions": [
+        {
+          "id": "ig_a04_20260926",
+          "userId": "Aashish",
+          "link": "https://www.instagram.com/reel/DdwfQwZTrKdGal1vVuBeaUZlswW97cEDzWe3ZU0/?stkn=Mnl4NzM2enQ1Z2pr",
+          "normalizedLink": "instagram.com/reel/ddwfqwztrkdgal1vvubeauzlsww97cedzwe3zu0",
+          "date": "2026-09-26",
+          "timestamp": "2026-09-26T21:00:00.000Z"
+        },
         {
           "id": "ig_1790389352673_a03",
           "userId": "Aashish",
