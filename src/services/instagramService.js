@@ -332,40 +332,32 @@ export async function fetchInstagramOverview() {
 }
 
 export async function submitInstagramLinkApi(userId, link) {
-  // First, process and persist locally so client state is guaranteed to update
+  // 1. Process and persist locally INSTANTLY so UI updates in 0ms
   const localRes = saveLocalSubmission(userId, link);
   if (!localRes.success) {
     return localRes;
   }
 
-  // Next, attempt to push to backend API (if persistent server exists)
-  try {
-    const res = await fetch('/api/instagram/submit', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-user-id': userId
-      },
-      body: JSON.stringify({ userId, link })
-    });
-
+  // 2. Attempt background push to backend API asynchronously (non-blocking)
+  fetch('/api/instagram/submit', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-user-id': userId
+    },
+    body: JSON.stringify({ userId, link })
+  }).then(async (res) => {
     if (res.ok) {
       const contentType = res.headers.get('content-type');
       if (contentType && contentType.includes('application/json')) {
-        const data = await res.json();
-        if (data.success) {
-          return {
-            success: true,
-            message: data.message || localRes.message,
-            data: data.data || localRes.data
-          };
-        }
+        await res.json();
       }
     }
-  } catch (err) {
-    console.warn('Backend server push skipped/failed (using client storage):', err);
-  }
+  }).catch((err) => {
+    console.warn('Background server push skipped/failed:', err);
+  });
 
+  // Return local response immediately so UI updates instantly
   return localRes;
 }
 

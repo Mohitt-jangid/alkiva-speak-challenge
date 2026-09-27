@@ -103,11 +103,22 @@ export default function InstagramChallengeSection({ onBackToHome }) {
           text: res.message || 'Link submitted successfully! Streak updated.'
         });
         setLinkInput('');
-        // Refresh backend overview data
-        const freshOverview = await fetchInstagramOverview();
-        setOverview(freshOverview);
-        // Refresh history
-        if (selectedUserHistory === activeUserId) {
+
+        // ⚡ INSTANT UI UPDATE: Apply updated overview data immediately
+        if (res.data && res.data.overview) {
+          setOverview(res.data.overview);
+        } else {
+          fetchInstagramOverview().then((fresh) => setOverview(fresh));
+        }
+
+        // ⚡ INSTANT HISTORY UPDATE: Prepend new submission immediately
+        if (res.data && res.data.submission) {
+          const newSub = res.data.submission;
+          setUserHistoryList((prev) => [
+            newSub,
+            ...prev.filter((item) => item.id !== newSub.id && item.link !== newSub.link)
+          ]);
+        } else if (selectedUserHistory === activeUserId) {
           loadHistory(activeUserId);
         }
       } else {
