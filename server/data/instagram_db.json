@@ -2,9 +2,17 @@
   "users": {
     "Mohit": {
       "userId": "Mohit",
-      "streak": 20,
-      "lastSubmissionDate": "2026-09-25",
+      "streak": 21,
+      "lastSubmissionDate": "2026-09-27",
       "submissions": [
+        {
+          "id": "ig_1790480363809_4yj1u",
+          "userId": "Mohit",
+          "link": "https://www.instagram.com/reel/Ddwj7EfOz7h0riTq79s48FdvXLzn8OVDf89X_00/?stkn=MWd2OGN0bDlrNDA5YQ==",
+          "normalizedLink": "instagram.com/reel/ddwj7efoz7h0ritq79s48fdvxlzn8ovdf89x_00",
+          "date": "2026-09-27",
+          "timestamp": "2026-09-27T03:39:23.809Z"
+        },
         {
           "id": "ig_1790389352672_d20",
           "userId": "Mohit",
@@ -169,7 +177,7 @@
     },
     "Aashish": {
       "userId": "Aashish",
-      "streak": 3,
+      "streak": 0,
       "lastSubmissionDate": "2026-09-25",
       "submissions": [
         {
@@ -200,7 +208,7 @@
     },
     "Ajay": {
       "userId": "Ajay",
-      "streak": 6,
+      "streak": 0,
       "lastSubmissionDate": "2026-09-25",
       "submissions": [
         {
