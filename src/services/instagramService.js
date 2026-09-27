@@ -49,7 +49,7 @@ const INITIAL_FALLBACK_DB = {
   users: {
     Mohit: {
       userId: 'Mohit',
-      streak: 20,
+      streak: 21,
       lastSubmissionDate: '2026-09-26',
       submissions: [
         { id: 'ig_1790480363809_4yj1u', userId: 'Mohit', link: 'https://www.instagram.com/reel/Ddwj7EfOz7h0riTq79s48FdvXLzn8OVDf89X_00/?stkn=MWd2OGN0bDlrNDA5YQ==', normalizedLink: 'instagram.com/reel/ddwj7efoz7h0ritq79s48fdvxlzn8ovdf89x_00', date: '2026-09-26', timestamp: '2026-09-26T20:00:00.000Z' },
@@ -111,7 +111,7 @@ function getLocalDb() {
         let modified = false;
         if (db.users.Mohit) {
           db.users.Mohit.lastSubmissionDate = '2026-09-26';
-          db.users.Mohit.streak = 20;
+          db.users.Mohit.streak = 21;
           if (db.users.Mohit.submissions && db.users.Mohit.submissions.length > 0) {
             if (db.users.Mohit.submissions[0].date === getTodayString()) {
               db.users.Mohit.submissions[0].date = '2026-09-26';
