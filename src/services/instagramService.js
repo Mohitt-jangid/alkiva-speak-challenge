@@ -106,48 +106,7 @@ function getLocalDb() {
   try {
     const raw = localStorage.getItem('talkiva_ig_db');
     if (raw) {
-      const db = JSON.parse(raw);
-      if (db && db.users) {
-        let modified = false;
-        if (db.users.Mohit) {
-          db.users.Mohit.lastSubmissionDate = '2026-09-26';
-          db.users.Mohit.streak = 21;
-          if (db.users.Mohit.submissions && db.users.Mohit.submissions.length > 0) {
-            if (db.users.Mohit.submissions[0].date === getTodayString()) {
-              db.users.Mohit.submissions[0].date = '2026-09-26';
-            }
-          }
-          modified = true;
-        }
-        if (db.users.Ajay && db.users.Ajay.lastSubmissionDate === getTodayString()) {
-          db.users.Ajay.lastSubmissionDate = '2026-09-26';
-          db.users.Ajay.streak = 6;
-          if (db.users.Ajay.submissions && db.users.Ajay.submissions.length > 0) {
-            if (db.users.Ajay.submissions[0].date === getTodayString()) {
-              db.users.Ajay.submissions[0].date = '2026-09-26';
-            }
-          }
-          modified = true;
-        }
-        if (db.users.Aashish) {
-          db.users.Aashish.lastSubmissionDate = '2026-09-26';
-          db.users.Aashish.streak = 4;
-          const hasDay4 = (db.users.Aashish.submissions || []).some(
-            (s) => s.id === 'ig_a04_20260926' || s.link.includes('DdwfQwZTrKdGal1vVuBeaUZlswW97cEDzWe3ZU0')
-          );
-          if (!hasDay4) {
-            db.users.Aashish.submissions = [
-              { id: 'ig_a04_20260926', userId: 'Aashish', link: 'https://www.instagram.com/reel/DdwfQwZTrKdGal1vVuBeaUZlswW97cEDzWe3ZU0/?stkn=Mnl4NzM2enQ1Z2pr', normalizedLink: 'instagram.com/reel/ddwfqwztrkdgal1vvubeauzlsww97cedzwe3zu0', date: '2026-09-26', timestamp: '2026-09-26T21:00:00.000Z' },
-              ...(db.users.Aashish.submissions || [])
-            ];
-          }
-          modified = true;
-        }
-        if (modified) {
-          saveLocalDb(db);
-        }
-      }
-      return db;
+      return JSON.parse(raw);
     }
   } catch (e) {
     console.error('Error reading local IG db:', e);
